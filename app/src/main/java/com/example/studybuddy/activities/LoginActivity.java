@@ -46,19 +46,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
+
                 //Check if the user is already set up
                 //Discussion Needed:
                 //what if the user has already entered some info. How to avoid requesting existence info
                 boolean isSetUp = dbHelper.isSetUp(email);
+                Intent intent;
                 if (!isSetUp) {
-                    Intent intent = new Intent(LoginActivity.this, UserProfileActivity.class);
-                    startActivity(intent);
-                    finish();
+                    intent = new Intent(LoginActivity.this, UserProfileActivity.class);
                 } else {
-                    Intent intent = new Intent(LoginActivity.this, MatchUserActivity.class);
-                    startActivity(intent);
-                    finish();
+                    intent = new Intent(LoginActivity.this, MatchUserActivity.class);
                 }
+                startActivity(intent);
+                finish();
             } else{
                 Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
             }

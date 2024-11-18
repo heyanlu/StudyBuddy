@@ -34,23 +34,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_8 = "PREFERRED_STUDY_TIME";
     public static final String COL_9 = "TOPICS_INTERESTED";
     public static final String COL_10 = "STUDY_DIFFICULTY_LEVEL";
+    public static final String COL_11 = "ALREADY_SIGN_UP";
 
+    //version 2: add column 11 "AlreadySignUp"
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "EMAIL TEXT, PASSWORD TEXT, FIRST_NAME TEXT, LAST_NAME TEXT, AGE INTEGER, " +
+                "EMAIL TEXT, PASSWORD TEXT, FIRST_NAME TEXT, LAST_NAME TEXT, AGE INTEGER," +
                 "GENDER TEXT, PREFERRED_STUDY_TIME TEXT, TOPICS_INTERESTED TEXT, " +
-                "STUDY_DIFFICULTY_LEVEL TEXT)");
+                "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN ALREADY_SIGN_UP INTEGER DEFAULT 0");
+        }
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+//        onCreate(db);
     }
 
     public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender) {
@@ -136,7 +142,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_9, topicsInterested);
         contentValues.put(COL_10, studyDifficultyLevel);
 
+
         int rowsUpdated = db.update(TABLE_NAME, contentValues, "ID = ?", new String[]{String.valueOf(userId)});
+        db.close();
+        return rowsUpdated > 0;
+    }
+
+    public boolean set_setUp(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_11, 1);
+        int rowsUpdated = db.update(TABLE_NAME, contentValues, "EMAIL = ?", new String[]{String.valueOf(email)});
         db.close();
         return rowsUpdated > 0;
     }
@@ -320,23 +336,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return topics;
     }
 
+
+
     //Check if the user is already set up
     public boolean isSetUp(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        //String query = " SELECT " + COL_3 + COL_4 + COL_5 + COL_6 + COL_7 + COL_8 + COL_9 + COL_10  + " FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
-        String query = " SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
+        String query = " SELECT " + COL_11 + " FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
         Cursor cursor = db.rawQuery(query, new String[]{email});
         boolean alreadySetUp = false;
         if (cursor != null && cursor.moveToFirst()) {
-            @SuppressLint("Range") String firstName = cursor.getString(cursor.getColumnIndex(COL_4));
-            @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COL_5));
-            @SuppressLint("Range") int age = cursor.getInt(cursor.getColumnIndex(COL_6));
-            @SuppressLint("Range") String gender = cursor.getString(cursor.getColumnIndex(COL_7));
-            @SuppressLint("Range") String studyTime = cursor.getString(cursor.getColumnIndex(COL_8));
-            @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
-            @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
-            if (firstName != null && lastName!= null && age >= 18 && gender!= null
-                    && studyTime!= null && topics != null && difficulty != null) {
+            @SuppressLint("Range") int setUp = cursor.getInt(cursor.getColumnIndex(COL_11));
+            if (setUp == 1) {
                 alreadySetUp = true;
             }
             cursor.close();
@@ -345,8 +355,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return alreadySetUp;
 
     }
-
-
-
 }
 
