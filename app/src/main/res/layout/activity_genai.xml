@@ -48,14 +48,14 @@
             android:hint="Write here"
             android:padding="16dp"
             android:background="@drawable/rounded_corner"
-            android:layout_toLeftOf="@+id/sendButton"
+            android:layout_toLeftOf="@+id/send_button"
 
             />
 
         <ImageButton
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:id="@+id/sendButton"
+            android:id="@+id/send_button"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
