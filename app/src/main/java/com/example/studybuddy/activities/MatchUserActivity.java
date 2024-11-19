@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,12 @@ public class MatchUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_user);
+
+        ImageView accountIcon = findViewById(R.id.accountIcon);
+        accountIcon.setOnClickListener(view -> {
+            Intent intent = new Intent(MatchUserActivity.this, AccountActivity.class);
+            startActivity(intent);
+        });
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -69,8 +76,8 @@ public class MatchUserActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_genai) {
                     openGenAIPage();
                     return true;
-                } else if (item.getItemId() == R.id.nav_profile) {
-                    openProfilePage();
+                } else if (item.getItemId() == R.id.nav_chat) {
+                    openChatPage();
                     return true;
                 } else {
                     return false;
@@ -87,7 +94,7 @@ public class MatchUserActivity extends AppCompatActivity {
         startActivity(new Intent(MatchUserActivity.this, GenAIActivity.class));
     }
 
-    private void openProfilePage() {
-        startActivity(new Intent(MatchUserActivity.this, ProfileActivity.class));
+    private void openChatPage() {
+        startActivity(new Intent(MatchUserActivity.this, chatActivity.class));
     }
 }

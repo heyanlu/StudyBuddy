@@ -1,4 +1,4 @@
 package com.example.studybuddy.activities;
 
-public class ProfileActivity {
+public class chatActivity {
 }
