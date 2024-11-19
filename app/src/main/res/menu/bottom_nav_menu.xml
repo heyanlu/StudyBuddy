@@ -12,12 +12,12 @@
         android:title="Likes You Get" />
 
     <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/chat"
+        android:title="Profile" />
+
+    <item
         android:id="@+id/nav_genai"
         android:icon="@drawable/genai"
         android:title="GenAI" />
-
-    <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/profile_user"
-        android:title="Profile" />
 </menu>
