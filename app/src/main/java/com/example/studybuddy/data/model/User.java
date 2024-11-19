@@ -69,4 +69,6 @@ public class User {
     public ArrayList<String> getTopicInterested() {
         return topicInterested;
     }
+
+
 }
