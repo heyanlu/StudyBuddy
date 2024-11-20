@@ -49,7 +49,7 @@ public class MatchUserActivity extends AppCompatActivity {
         currentUserTopics.add("Math");
         currentUserTopics.add("English");
 
-        ArrayList<User> users = dbHelper.getUsersWithSameTopics(currentUserTopics); // Correctly declaring ArrayList of User objects
+        ArrayList<User> users = dbHelper.getUsersWithSameTopics(currentUserTopics);
 
         Map<String, List<User>> sectionedData = new HashMap<>();
         for (String topic : currentUserTopics) {

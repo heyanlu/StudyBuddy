@@ -24,11 +24,10 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(intent);
         }
-
         finish();
     }
 
-    private void navigateToNextActivity(String email) {
+        private void navigateToNextActivity(String email) {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         boolean isSetUp = dbHelper.isSetUp(email);
 

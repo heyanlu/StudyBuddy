@@ -3,10 +3,9 @@ package com.example.studybuddy.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +30,22 @@ public class LoginActivity extends AppCompatActivity {
         Button buttonLogin = findViewById(R.id.buttonLogin);
         Button buttonSignup = findViewById(R.id.buttonSignup);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("userEmail", null);
+
+//        if (userEmail != null) {
+//            navigateToNextActivity(userEmail);
+//            finish();
+//        }
+
+        // Testing
+        if (userEmail != null) {
+            Log.d("LoginActivity", "User is logged in with email: " + userEmail);
+            navigateToNextActivity(userEmail);
+        } else {
+            Log.d("LoginActivity", "No logged-in user found.");
+        }
+
         buttonLogin.setOnClickListener(view -> {
             email = editTextLoginEmail.getText().toString();
             String password = editTextLoginPassword.getText().toString();
@@ -42,17 +57,12 @@ public class LoginActivity extends AppCompatActivity {
 
             boolean isValid = dbHelper.validateUser(email, password);
             if (isValid) {
-                SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("userEmail", email);
                 editor.apply();
 
                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-
-                //Check if the user is already set up
-                //Discussion Needed:
-                //what if the user has already entered some info. How to avoid requesting existence info
                 boolean isSetUp = dbHelper.isSetUp(email);
                 Intent intent;
                 if (!isSetUp) {
@@ -62,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 startActivity(intent);
                 finish();
-            } else{
+            } else {
                 Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
             }
         });
@@ -72,14 +82,16 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
-        String userID = dbHelper.getUserIDByEmail(email);
-        Intent intent = new Intent(LoginActivity.this, ShowUserProfileActivity.class);
-        intent.putExtra("userID", userID);
-        intent.putExtra("email", email);
-        startActivity(intent);
-
     }
 
-
+    private void navigateToNextActivity(String email) {
+        boolean isSetUp = dbHelper.isSetUp(email);
+        Intent intent;
+        if (!isSetUp) {
+            intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+        } else {
+            intent = new Intent(LoginActivity.this, MatchUserActivity.class);
+        }
+        startActivity(intent);
+    }
 }
