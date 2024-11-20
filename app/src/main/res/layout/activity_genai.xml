@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/welcome_text"
-        android:text="Welcome to Fake ChatGPT!"
+        android:text="Welcome to StudyBuddy!"
         android:gravity="center"
         android:layout_centerInParent="true"
         android:textSize="20dp"
