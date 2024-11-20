@@ -370,5 +370,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Get User ID (for sending connect request）
+    @SuppressLint("Range")
+    public String getUserIDByEmail(String email) {
+        ArrayList<String> topics = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String userID = "";
+        String query = "SELECT " + COL_1 + " FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+        if (cursor != null && cursor.moveToFirst()) {
+            userID = cursor.getString(cursor.getColumnIndex(COL_1));
+            cursor.close();
+        }
+        db.close();
+
+        return userID;
+    }
 }
 

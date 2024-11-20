@@ -17,6 +17,7 @@ import com.example.studybuddy.data.database.DatabaseHelper;
 public class LoginActivity extends AppCompatActivity {
     private EditText editTextLoginEmail, editTextLoginPassword;
     private DatabaseHelper dbHelper;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         Button buttonSignup = findViewById(R.id.buttonSignup);
 
         buttonLogin.setOnClickListener(view -> {
-            String email = editTextLoginEmail.getText().toString();
+            email = editTextLoginEmail.getText().toString();
             String password = editTextLoginPassword.getText().toString();
 
             if (email.isEmpty() || password.isEmpty()) {
@@ -71,5 +72,14 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        String userID = dbHelper.getUserIDByEmail(email);
+        Intent intent = new Intent(LoginActivity.this, ShowUserProfileActivity.class);
+        intent.putExtra("userID", userID);
+        intent.putExtra("email", email);
+        startActivity(intent);
+
     }
+
+
 }
