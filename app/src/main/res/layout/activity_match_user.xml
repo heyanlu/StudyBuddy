@@ -19,13 +19,13 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/accountIcon"
+        android:id="@+id/dropdownIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="Account Icon"
-        android:src="@drawable/account"
+        android:contentDescription="Dropdown Icon"
+        android:src="@drawable/dropdown_menu"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

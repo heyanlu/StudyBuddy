@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -30,11 +31,14 @@ public class MatchUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_user);
 
-        ImageView accountIcon = findViewById(R.id.accountIcon);
-        accountIcon.setOnClickListener(view -> {
-            Intent intent = new Intent(MatchUserActivity.this, AccountActivity.class);
-            startActivity(intent);
-        });
+        ImageView dropdownIcon = findViewById(R.id.dropdownIcon);
+
+        dropdownIcon.setOnClickListener(view -> showPopupMenu(view));
+
+//        dropdownIcon.setOnClickListener(view -> {
+//            Intent intent = new Intent(MatchUserActivity.this, AccountActivity.class);
+//            startActivity(intent);
+//        });
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -84,6 +88,24 @@ public class MatchUserActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void showPopupMenu(View view) {
+        android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(this, view);
+        getMenuInflater().inflate(R.menu.dropdown_menu, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.account) {
+                startActivity(new Intent(MatchUserActivity.this, AccountActivity.class));
+                return true;
+            } else if (menuItem.getItemId() == R.id.setting) {
+                startActivity(new Intent(MatchUserActivity.this, SettingActivity.class));
+                return true;
+            }
+            return false;
+        });
+
+        popupMenu.show();
     }
 
     private void openLikesPage() {
