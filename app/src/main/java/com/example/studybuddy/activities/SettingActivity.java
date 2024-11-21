@@ -1,4 +1,6 @@
 package com.example.studybuddy.activities;
 
-public class SettingActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SettingActivity extends AppCompatActivity {
 }

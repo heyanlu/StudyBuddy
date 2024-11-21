@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         dbHelper = new DatabaseHelper(this);
-
         editTextLoginEmail = findViewById(R.id.editTextLoginEmail);
         editTextLoginPassword = findViewById(R.id.editTextLoginPassword);
         Button buttonLogin = findViewById(R.id.buttonLogin);
@@ -60,8 +59,12 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("userEmail", email);
                 editor.apply();
-
                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                //store userID and pass it to ShowUserProfile for connecting purpose
+                String userID = dbHelper.getUserIDByEmail(email);
+                editor.putString("userID", userID);
+                editor.apply();
 
                 boolean isSetUp = dbHelper.isSetUp(email);
                 Intent intent;
