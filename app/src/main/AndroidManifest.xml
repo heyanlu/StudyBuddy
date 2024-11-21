@@ -17,15 +17,7 @@
         <activity
             android:name=".activities.ShowUserProfileActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-<!--        <activity-->
-<!--            android:name=".activities.RequestConnection"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true"
