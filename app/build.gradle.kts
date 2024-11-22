@@ -44,11 +44,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation (libs.material) //Add for password visibility
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation(platform(libs.firebase.bom)) //Import the Firebase BoM
-    implementation(libs.firebase.analytics) // Add the dependency for the Firebase SDK for Google Analytics
-    implementation(libs.firebase.database) // Add the dependency for the Realtime Database library
-
-
-
 
 }
