@@ -3,18 +3,30 @@ package com.example.studybuddy.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studybuddy.R;
 import com.example.studybuddy.data.database.DatabaseHelper;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText editTextLoginEmail, editTextLoginPassword;
+    //private EditText editTextLoginPassword;
+    private TextInputEditText editTextLoginEmail, editTextLoginPassword;
+    private boolean passwordVisible = false; //initially the password is not visible
+    private TextInputLayout passwordLayout;
+    private TextView signUpLink;
+    private TextView forgetPasswordLink;
     private DatabaseHelper dbHelper;
     private String email;
 
@@ -24,13 +36,35 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         dbHelper = new DatabaseHelper(this);
-        editTextLoginEmail = findViewById(R.id.editTextLoginEmail);
-        editTextLoginPassword = findViewById(R.id.editTextLoginPassword);
+        editTextLoginEmail = findViewById(R.id.emailEditText);
+        editTextLoginPassword = findViewById(R.id.passwordEditText);
+
         Button buttonLogin = findViewById(R.id.buttonLogin);
-        Button buttonSignup = findViewById(R.id.buttonSignup);
+
+        signUpLink = findViewById(R.id.signUpLink);
+        String htmlText = "Don't have an account?  <font color='#3344DD'>Sign up here!</font>";
+        signUpLink.setText(Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY));
+
+        signUpLink = findViewById(R.id.signUpLink);
+        signUpLink.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SignupActivity.class);
+            startActivity(intent);
+            finish();
+        });
+        //Button buttonSignup = findViewById(R.id.signUpLink);
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("userEmail", null);
+
+        passwordLayout = findViewById(R.id.confirmPasswordLayout);
+
+        passwordLayout.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility();
+            }
+        });
+
 
 //        if (userEmail != null) {
 //            navigateToNextActivity(userEmail);
@@ -80,11 +114,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        buttonSignup.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-            startActivity(intent);
-            finish();
-        });
+//        buttonSignup.setOnClickListener(view -> {
+//            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+//            startActivity(intent);
+//            finish();
+//        });
     }
 
     private void navigateToNextActivity(String email) {
@@ -97,4 +131,21 @@ public class LoginActivity extends AppCompatActivity {
         }
         startActivity(intent);
     }
+
+    private void togglePasswordVisibility() {
+        passwordVisible = !passwordVisible;
+        if (passwordVisible) {
+            // Show password
+            //The function HideReturnsTransformationMethod - shows password in a readable plain format
+            editTextLoginPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordLayout.setEndIconDrawable(R.drawable.baseline_visibility_off_24);
+        } else {
+            // Hide password
+            editTextLoginPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordLayout.setEndIconDrawable(R.drawable.baseline_visibility_24);
+        }
+        // Move cursor to the end of the text
+        editTextLoginPassword.setSelection(editTextLoginPassword.getText().length());
+    }
 }
+
