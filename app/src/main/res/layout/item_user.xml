@@ -3,49 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:padding="12dp">
+    android:layout_marginBottom="12dp"
+    android:padding="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
+        <!-- First Name TextView -->
         <TextView
             android:id="@+id/firstNameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="First Name"
             android:textSize="16sp"
+            android:textColor="@android:color/black"
             android:drawableStart="@drawable/ic_person"
             android:drawablePadding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/lastNameTextView" />
 
+        <!-- Last Name TextView -->
         <TextView
             android:id="@+id/lastNameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Last Name"
             android:textSize="16sp"
+            android:textColor="@android:color/black"
             android:drawablePadding="8dp"
             app:layout_constraintStart_toEndOf="@id/firstNameTextView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Time TextView -->
         <TextView
             android:id="@+id/timeTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Study Time"
             android:textSize="16sp"
+            android:textColor="@android:color/black"
             android:drawableStart="@drawable/ic_time"
             android:drawablePadding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="8dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
+
