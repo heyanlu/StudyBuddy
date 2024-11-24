@@ -18,8 +18,8 @@ import java.util.Map;
 
 public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final Map<String, List<User>> sectionedData;
-    private final List<Object> displayList;
+    private Map<String, List<User>> sectionedData;
+    private List<Object> displayList;
 
     private static final int VIEW_TYPE_HEADER = 0;
     private static final int VIEW_TYPE_USER = 1;
@@ -27,12 +27,24 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     public SectionedUserAdapter(Map<String, List<User>> sectionedData) {
         this.sectionedData = sectionedData;
         this.displayList = new ArrayList<>();
+        buildDisplayList();
+    }
 
+    // Rebuild the displayList whenever data changes
+    private void buildDisplayList() {
+        displayList.clear();
         for (Map.Entry<String, List<User>> entry : sectionedData.entrySet()) {
-            displayList.add(entry.getKey());
-            displayList.addAll(entry.getValue());
+            displayList.add(entry.getKey()); // Add the section header
+            displayList.addAll(entry.getValue()); // Add users for that section
         }
         Log.d("SectionedUserAdapter", "Display List: " + displayList.toString());
+    }
+
+    // Update the data in the adapter
+    public void updateData(Map<String, List<User>> newSectionedData) {
+        this.sectionedData = newSectionedData;
+        buildDisplayList(); // Rebuild displayList based on new data
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
     }
 
     @Override
@@ -75,6 +87,7 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    // ViewHolder for section header
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
         TextView sectionTitle;
 
@@ -84,6 +97,7 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    // ViewHolder for user items
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView firstNameTextView, lastNameTextView, timeTextView;
 

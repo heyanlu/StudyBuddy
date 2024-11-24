@@ -12,14 +12,18 @@ import com.example.studybuddy.R;
 import com.example.studybuddy.data.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
     private ArrayList<User> userList;
 
+
     public UserAdapter(ArrayList<User> userList) {
         this.userList = userList;
     }
+
 
     @NonNull
     @Override
