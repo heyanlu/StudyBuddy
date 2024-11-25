@@ -28,7 +28,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         editFirstName = findViewById(R.id.editFirstName);
         editLastName = findViewById(R.id.editLastName);
-//        editAge = findViewById(R.id.editAge);
+        editAge = findViewById(R.id.editAge);
         radioGroupGender = findViewById(R.id.radioGroupGender);
         btnSaveProfile = findViewById(R.id.buttonSaveProfile);
 

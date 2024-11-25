@@ -6,139 +6,148 @@
     android:padding="24dp"
     android:background="@drawable/background9">
 
-    <!-- Main Content -->
-    <ScrollView
+    <!-- Progress Bar Section -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textProgress"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="1/4"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginEnd="10dp" />
 
-            <!-- Progress Bar Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="4"
+            android:progress="1"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/progress_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal" />
+    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textProgress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1/4"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="center" />
+    <!-- Title Text -->
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tell us about you"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:max="4"
-                    android:progress="1"
-                    android:indeterminate="false"
-                    android:progressDrawable="@drawable/progress_bar"
-                    style="@android:style/Widget.ProgressBar.Horizontal" />
-            </LinearLayout>
+    <!-- First Name -->
+    <TextView
+        android:id="@+id/textFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
 
-            <!-- Title Text -->
-            <TextView
-                android:id="@+id/textTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tell us about you"
-                android:textSize="24sp"
-                android:textColor="#333333"
-                android:textStyle="bold"
-                android:layout_marginBottom="24dp"
-                android:layout_gravity="center_horizontal" />
+    <EditText
+        android:id="@+id/editFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter first name"
+        android:inputType="textPersonName"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
 
-            <!-- First Name -->
-            <TextView
-                android:id="@+id/textFirstName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First Name"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="8dp" />
+    <!-- Last Name -->
+    <TextView
+        android:id="@+id/textLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
 
-            <EditText
-                android:id="@+id/editFirstName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter first name"
-                android:inputType="textPersonName"
-                android:textColor="#333333"
-                android:backgroundTint="#CCCCCC"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp" />
+    <EditText
+        android:id="@+id/editLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter last name"
+        android:inputType="textPersonName"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
 
-            <!-- Last Name -->
-            <TextView
-                android:id="@+id/textLastName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Last Name"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="8dp" />
+    <!-- Gender -->
+    <TextView
+        android:id="@+id/textGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
 
-            <EditText
-                android:id="@+id/editLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter last name"
-                android:inputType="textPersonName"
-                android:textColor="#333333"
-                android:backgroundTint="#CCCCCC"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp" />
+    <RadioGroup
+        android:id="@+id/radioGroupGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
-            <!-- Gender -->
-            <TextView
-                android:id="@+id/textGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gender"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="8dp" />
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:textSize="16sp"
+            android:textColor="#333333" />
 
-            <RadioGroup
-                android:id="@+id/radioGroupGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="24dp">
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:textSize="16sp"
+            android:textColor="#333333" />
 
-                <RadioButton
-                    android:id="@+id/radioMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:textSize="16sp"
-                    android:textColor="#333333" />
+        <RadioButton
+            android:id="@+id/radioOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:textSize="16sp"
+            android:textColor="#333333" />
+    </RadioGroup>
 
-                <RadioButton
-                    android:id="@+id/radioFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:textSize="16sp"
-                    android:textColor="#333333"
-                    android:layout_marginStart="16dp" />
-            </RadioGroup>
-        </LinearLayout>
-    </ScrollView>
+    <!-- Age -->
+    <TextView
+        android:id="@+id/textAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
 
-    <!-- Button at the Bottom -->
+    <EditText
+        android:id="@+id/editAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter age"
+        android:inputType="number"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Save Button -->
+
     <Button
         android:id="@+id/buttonSaveProfile"
         android:layout_width="match_parent"
@@ -149,4 +158,5 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:padding="12dp" />
+
 </LinearLayout>
