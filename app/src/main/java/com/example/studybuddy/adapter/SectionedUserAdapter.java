@@ -13,6 +13,7 @@ import com.example.studybuddy.R;
 import com.example.studybuddy.data.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private Map<String, List<User>> sectionedData;
     private List<Object> displayList;
+    private Map<String, Boolean> sectionVisibilityMap;
 
     private static final int VIEW_TYPE_HEADER = 0;
     private static final int VIEW_TYPE_USER = 1;
@@ -27,24 +29,29 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     public SectionedUserAdapter(Map<String, List<User>> sectionedData) {
         this.sectionedData = sectionedData;
         this.displayList = new ArrayList<>();
+        this.sectionVisibilityMap = new HashMap<>();
         buildDisplayList();
     }
 
-    // Rebuild the displayList whenever data changes
     private void buildDisplayList() {
         displayList.clear();
         for (Map.Entry<String, List<User>> entry : sectionedData.entrySet()) {
-            displayList.add(entry.getKey()); // Add the section header
-            displayList.addAll(entry.getValue()); // Add users for that section
+            String section = entry.getKey();
+            List<User> users = entry.getValue();
+
+            displayList.add(section);
+
+            if (sectionVisibilityMap.getOrDefault(section, true)) {
+                displayList.addAll(users);
+            }
         }
         Log.d("SectionedUserAdapter", "Display List: " + displayList.toString());
     }
 
-    // Update the data in the adapter
     public void updateData(Map<String, List<User>> newSectionedData) {
         this.sectionedData = newSectionedData;
-        buildDisplayList(); // Rebuild displayList based on new data
-        notifyDataSetChanged(); // Notify the adapter that the data has changed
+        buildDisplayList();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -65,12 +72,41 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == VIEW_TYPE_HEADER) {
             String sectionTitle = (String) displayList.get(position);
-            ((HeaderViewHolder) holder).sectionTitle.setText(sectionTitle);
+            HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
+            headerHolder.sectionTitle.setText(sectionTitle);
+
+            View longUnderline = headerHolder.longUnderline;
+
+            boolean isVisible = sectionVisibilityMap.getOrDefault(sectionTitle, true);
+            if (isVisible) {
+                headerHolder.sectionTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.arrow_drop_down, 0);
+                longUnderline.setVisibility(View.GONE);
+            } else {
+                headerHolder.sectionTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.arrow_drop_up, 0);
+                longUnderline.setVisibility(View.VISIBLE);
+            }
+
+            headerHolder.sectionTitle.setOnClickListener(v -> {
+                boolean currentVisibility = sectionVisibilityMap.getOrDefault(sectionTitle, true);
+                sectionVisibilityMap.put(sectionTitle, !currentVisibility);
+
+                if (currentVisibility) {
+                    headerHolder.sectionTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.arrow_drop_up, 0);
+                    longUnderline.setVisibility(View.VISIBLE);
+                } else {
+                    headerHolder.sectionTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.arrow_drop_down, 0);
+                    longUnderline.setVisibility(View.GONE);
+                }
+
+                buildDisplayList();
+                notifyDataSetChanged();
+            });
         } else {
             User user = (User) displayList.get(position);
-            ((UserViewHolder) holder).firstNameTextView.setText(user.getFirstName());
-            ((UserViewHolder) holder).lastNameTextView.setText(user.getLastName());
-            ((UserViewHolder) holder).timeTextView.setText(user.getFormattedStudyTime());
+            UserViewHolder userHolder = (UserViewHolder) holder;
+            userHolder.firstNameTextView.setText(user.getFirstName());
+            userHolder.lastNameTextView.setText(user.getLastName());
+            userHolder.timeTextView.setText(user.getFormattedStudyTime());
         }
     }
 
@@ -87,17 +123,17 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    // ViewHolder for section header
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
         TextView sectionTitle;
+        View longUnderline;
 
         HeaderViewHolder(View itemView) {
             super(itemView);
             sectionTitle = itemView.findViewById(R.id.sectionTitle);
+            longUnderline = itemView.findViewById(R.id.longUnderline);
         }
     }
 
-    // ViewHolder for user items
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView firstNameTextView, lastNameTextView, timeTextView;
 
