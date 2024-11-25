@@ -4,139 +4,144 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="#F9F9F9">
+    android:background="@drawable/background9">
 
-    <!-- Progress Bar Section -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="20dp">
-
-        <TextView
-            android:id="@+id/textProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3/4"
-            android:textSize="16sp"
-            android:textColor="#333333"
-            android:layout_marginEnd="10dp" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:max="4"
-            android:progress="3"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/progress_bar"
-            style="@android:style/Widget.ProgressBar.Horizontal" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="When do you prefer to study?"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="40dp" />
-
-    <!-- Study Time Selection Section -->
+    <!-- Main Content -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Weekday Study Time -->
+            <!-- Progress Bar Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/textProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3/4"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_marginEnd="10dp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="4"
+                    android:progress="3"
+                    android:indeterminate="false"
+                    android:progressDrawable="@drawable/progress_bar"
+                    style="@android:style/Widget.ProgressBar.Horizontal" />
+            </LinearLayout>
+
+            <!-- Question -->
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/textQuestion"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Weekdays"
-                android:textSize="16sp"
+                android:text="When do you prefer to study?"
+                android:textSize="18sp"
                 android:textColor="#333333"
-                android:layout_marginTop="16dp"/>
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="40dp" />
 
-            <CheckBox
-                android:id="@+id/checkWeekdayMorning"
+            <!-- Study Time Selection Section -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Weekday Morning"
-                android:textSize="16sp"
-                android:textColor="#333333" />
+                android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/checkWeekdayAfternoon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Weekday Afternoon"
-                android:textSize="16sp"
-                android:textColor="#333333" />
+                <!-- Weekday Study Time -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekdays"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_marginTop="16dp" />
 
-            <CheckBox
-                android:id="@+id/checkWeekdayEvening"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Weekday Evening"
-                android:textSize="16sp"
-                android:textColor="#333333" />
+                <CheckBox
+                    android:id="@+id/checkWeekdayMorning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekday Morning"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
 
-            <!-- Weekend Study Time -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Weekends"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginTop="16dp"/>
+                <CheckBox
+                    android:id="@+id/checkWeekdayAfternoon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekday Afternoon"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
 
-            <CheckBox
-                android:id="@+id/checkWeekendMorning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Weekend Morning"
-                android:textSize="16sp"
-                android:textColor="#333333" />
+                <CheckBox
+                    android:id="@+id/checkWeekdayEvening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekday Evening"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
 
-            <CheckBox
-                android:id="@+id/checkWeekendAfternoon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Weekend Afternoon"
-                android:textSize="16sp"
-                android:textColor="#333333" />
+                <!-- Weekend Study Time -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekends"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_marginTop="16dp" />
 
-            <CheckBox
-                android:id="@+id/checkWeekendEvening"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Weekend Evening"
-                android:textSize="16sp"
-                android:textColor="#333333" />
+                <CheckBox
+                    android:id="@+id/checkWeekendMorning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekend Morning"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
 
-            <Button
-                android:id="@+id/buttonNext2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Next"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF"
-                android:background="@color/primaryColor"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp" />
+                <CheckBox
+                    android:id="@+id/checkWeekendAfternoon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekend Afternoon"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
 
+                <CheckBox
+                    android:id="@+id/checkWeekendEvening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weekend Evening"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-
-
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/buttonNext2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/primaryColor"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:padding="12dp" />
 </LinearLayout>
