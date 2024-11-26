@@ -2,6 +2,7 @@ package com.example.studybuddy.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -28,7 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputEditText passwordEditText;
 
     private TextInputLayout confirmPasswordLayout;
-    private TextInputEditText confirmPasswordEditText;
+    private TextInputEditText confirmPasswordEditText, userFullName;
 
 
     @Override
@@ -42,13 +43,22 @@ public class SignupActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.editTextPassword);
         buttonSignup = findViewById(R.id.signup_button);
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
-       // TextView textViewLogin = findViewById(R.id.textViewLogin);
+        userFullName = findViewById(R.id.userNameEditText);
+
+        TextView loginLink = findViewById(R.id.loginLink);
+        String htmlText = "Already a member?  <font color='#3344DD'>Login here!</font>";
+        loginLink.setText(Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY));
 
 
         buttonSignup.setOnClickListener(view -> {
             String email = editTextEmail.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
             String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+            String name = userFullName.getText().toString().trim();
+
+            if(!ValidationUtils.isUserNameEmpty(name)){
+                Toast.makeText(SignupActivity.this, "Name can't be empty", Toast.LENGTH_SHORT).show();
+            }
 
             if (!ValidationUtils.isValidEmail(email)){
                 Toast.makeText(SignupActivity.this, "Invalid email format", Toast.LENGTH_SHORT).show();
@@ -77,11 +87,11 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-//        textViewLogin.setOnClickListener(view -> {
-//            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-//            startActivity(intent);
-//            finish();
- //       });
+        loginLink.setOnClickListener(view -> {
+            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         //The below code helps to toggle the password field
         passwordLayout = findViewById(R.id.password_layout);

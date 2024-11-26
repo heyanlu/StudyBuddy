@@ -19,4 +19,8 @@
     <string name="password_no_match">Passwords do not match!</string>
     <string name="login_here">Already have an account? Login here!</string>
 
+    <!--User Profile Activity -->
+    <string name="text_progress_bar">1/4</string>
+    <string name="title">Tell us about yourself</string>
+
 </resources>

@@ -14,6 +14,7 @@ public class User {
     private String lastName;
     private int age;
     private String gender;
+    private String occupation;
     private ArrayList<String> preferredStudyTime;
     private ArrayList<String> topicInterested;
     private String studyDifficultyLevel;
@@ -24,11 +25,12 @@ public class User {
 
     public User(String email, String password, String firstName, String lastName, int age,
                 String gender, ArrayList<String> preferredStudyTime, ArrayList<String> topicInterested,
-                String studyDifficultyLevel) {
+                String studyDifficultyLevel, String occupation) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.occupation = occupation;
         this.age = age;
         this.gender = gender;
         this.preferredStudyTime = preferredStudyTime;

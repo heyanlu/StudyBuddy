@@ -27,5 +27,11 @@ public class ValidationUtils {
         return matcher.matches();
     }
 
+    public static boolean isUserNameEmpty(String name){
+        if(name.isEmpty() || name.isBlank())
+            return false;
+        return true;
+    }
+
 
 }

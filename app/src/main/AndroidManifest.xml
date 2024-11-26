@@ -14,72 +14,59 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyBuddy"
         tools:targetApi="31">
-
         <activity
             android:name=".activities.ShowOtherUserProfileActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true"
             android:label="Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.SignupActivity"
             android:exported="true"
             android:label="Sign Up" />
-
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true"
             android:label="Log In" />
-
         <activity
             android:name=".activities.UserProfileActivity"
             android:exported="true"
             android:label="Preference" />
-
         <activity
             android:name=".activities.TopicPreferenceActivity"
             android:exported="true"
             android:label="Preference" />
-
         <activity
             android:name=".activities.StudyTimePreferenceActivity"
             android:exported="true"
             android:label="Preference" />
-
         <activity
             android:name=".activities.DifficultyPreferenceActivity"
             android:exported="true"
             android:label="Preference" />
-
         <activity
             android:name=".activities.MatchUserActivity"
             android:exported="true"
             android:label="home" />
-
         <activity
             android:name=".activities.GenAIActivity"
             android:exported="true"
             android:label="genai" />
-
         <activity
             android:name=".activities.AccountActivity"
             android:exported="true"
             android:label="genai" />
-
         <activity
             android:name=".activities.SettingActivity"
             android:exported="true"
             android:label="genai" />
-
         <activity
             android:name=".activities.LikesActivity"
             android:exported="true"
