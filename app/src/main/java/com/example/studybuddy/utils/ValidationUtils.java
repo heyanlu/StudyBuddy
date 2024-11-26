@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class ValidationUtils {
 
     public static boolean isValidEmail(String email) {
-        if (email == null || email.isEmpty()) {
+        if (email == null || email.isEmpty() || email.isBlank()) {
             return false;
         }
 
@@ -19,11 +19,19 @@ public class ValidationUtils {
     }
 
     public static boolean isValidPassword(String password) {
-        if (password == null) {
+        if (password == null || password.isEmpty() || password.isBlank()) {
             return false;
         }
         Pattern passwordPattern = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{6,}$");
         Matcher matcher = passwordPattern.matcher(password);
         return matcher.matches();
     }
+
+    public static boolean isUserNameEmpty(String name){
+        if(name.isEmpty() || name.isBlank())
+            return false;
+        return true;
+    }
+
+
 }

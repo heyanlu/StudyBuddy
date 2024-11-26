@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_9 = "TOPICS_INTERESTED";
     public static final String COL_10 = "STUDY_DIFFICULTY_LEVEL";
     public static final String COL_11 = "ALREADY_SIGN_UP";
+    public static final String COL_12 = "Occupation";
 
     //version 2: add column 11 "AlreadySignUp"
     public DatabaseHelper(Context context) {
@@ -43,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "EMAIL TEXT, PASSWORD TEXT, FIRST_NAME TEXT, LAST_NAME TEXT, AGE INTEGER," +
                 "GENDER TEXT, PREFERRED_STUDY_TIME TEXT, TOPICS_INTERESTED TEXT, " +
-                "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0)");
+                "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0, OCCUPATION TEXT)");
     }
 
     @Override
@@ -55,13 +56,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        onCreate(db);
     }
 
-    public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender) {
+    public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender, String occupation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_4, firstName);
         contentValues.put(COL_5, lastName);
         contentValues.put(COL_6, age);
         contentValues.put(COL_7, gender);
+        //contentValues.put(COL_12, occupation);
 
         int rowsUpdated = db.update(TABLE_NAME, contentValues, COL_2 + " = ?", new String[]{email});
         db.close();
@@ -169,6 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String studyTime = cursor.getString(cursor.getColumnIndex(COL_8));
                 @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
                 @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
+               // @SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
 
                 ArrayList<String> studyTimeList = new ArrayList<>();
                 if (studyTime != null && !studyTime.isEmpty()) {
@@ -187,6 +190,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
 
                 User user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+                //User user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty, occupation);
                 users.add(user);
 
             } while (cursor.moveToNext());
@@ -237,6 +241,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     @SuppressLint("Range") String studyTime = cursor.getString(cursor.getColumnIndex(COL_8));
                     @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
                     @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
+                    //@SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
 
                     // Parse study time preferences into a list
                     ArrayList<String> studyTimeList = new ArrayList<>();
@@ -256,6 +261,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     // Create User object and add it to the list
                     User user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+                    //User user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty, occupation);
                     users.add(user);
 
                 } while (cursor.moveToNext());
@@ -300,6 +306,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COL_5));
                 @SuppressLint("Range") int age = cursor.getInt(cursor.getColumnIndex(COL_6));
                 @SuppressLint("Range") String gender = cursor.getString(cursor.getColumnIndex(COL_7));
+                //@SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
 
                 @SuppressLint("Range")
                 String preferredStudyTimeString = cursor.getString(cursor.getColumnIndex(COL_8));
@@ -382,7 +389,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //For users to see the person's profile who likes them
-<<<<<<< Updated upstream
     public User getUserInfoByEmail(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
@@ -390,16 +396,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         User user = null;
         if (cursor != null && cursor.moveToFirst()) {
             do {
-=======
-    public User getUserInfoByID(String userID) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_1 + " = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{userID});
-        User user = null;
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
                 @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COL_2));
->>>>>>> Stashed changes
                 @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(COL_3));
                 @SuppressLint("Range") String firstName = cursor.getString(cursor.getColumnIndex(COL_4));
                 @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COL_5));
@@ -408,6 +405,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String studyTime = cursor.getString(cursor.getColumnIndex(COL_8));
                 @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
                 @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
+                //@SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
                 ArrayList<String> studyTimeList = new ArrayList<>();
                 if (studyTime != null && !studyTime.isEmpty()) {
                     String[] studyTimeArray = studyTime.split(",");
@@ -423,11 +421,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         topicsList.add(topic.trim());
                     }
                 }
-<<<<<<< Updated upstream
                 user = new User(userEmail, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
-=======
-                user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
->>>>>>> Stashed changes
             } while (cursor.moveToNext());
             cursor.close();
         }

@@ -16,7 +16,7 @@ import com.example.studybuddy.data.database.DatabaseHelper;
 
 public class UserProfileActivity extends AppCompatActivity {
 
-    private EditText editFirstName, editLastName, editAge;
+    private EditText editFirstName, editLastName, editAge, occupation;
     private RadioGroup radioGroupGender;
     private Button btnSaveProfile;
     private DatabaseHelper databaseHelper;
@@ -31,6 +31,7 @@ public class UserProfileActivity extends AppCompatActivity {
         editAge = findViewById(R.id.editAge);
         radioGroupGender = findViewById(R.id.radioGroupGender);
         btnSaveProfile = findViewById(R.id.buttonSaveProfile);
+        occupation = findViewById(R.id.editOccupation);
 
         databaseHelper = new DatabaseHelper(this);
 
@@ -38,27 +39,29 @@ public class UserProfileActivity extends AppCompatActivity {
             String firstName = editFirstName.getText().toString().trim();
             String lastName = editLastName.getText().toString().trim();
             String ageString = editAge.getText().toString().trim();
+            String occupationText = occupation.getText().toString().trim();
             int age = ageString.isEmpty() ? 0 : Integer.parseInt(ageString);
 
             int selectedGenderId = radioGroupGender.getCheckedRadioButtonId();
             RadioButton selectedGenderButton = findViewById(selectedGenderId);
             String gender = (selectedGenderButton != null) ? selectedGenderButton.getText().toString() : "";
 
+
             if (firstName.isEmpty() || lastName.isEmpty()) {
                 Toast.makeText(UserProfileActivity.this, "First name and Last name are required.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            saveProfileToDatabase(firstName, lastName, age, gender);
+            saveProfileToDatabase(firstName, lastName, age, gender, occupationText);
         });
     }
 
-    private void saveProfileToDatabase(String firstName, String lastName, int age, String gender) {
+    private void saveProfileToDatabase(String firstName, String lastName, int age, String gender, String occupation) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("userEmail", null);
 
         if (userEmail != null) {
-            boolean isUpdated = databaseHelper.updateUserProfile(userEmail, firstName, lastName, age, gender);
+            boolean isUpdated = databaseHelper.updateUserProfile(userEmail, firstName, lastName, age, gender, occupation);
 
             if (isUpdated) {
                 Toast.makeText(this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
