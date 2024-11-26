@@ -31,20 +31,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-<<<<<<< Updated upstream
-    <!-- Bottom Navigation with icon and custom styles -->
-=======
->>>>>>> Stashed changes
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav_menu"
-<<<<<<< Updated upstream
+
         app:itemIconTint="@color/primaryColor"
         app:itemTextColor="@color/primaryColor"
-=======
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
