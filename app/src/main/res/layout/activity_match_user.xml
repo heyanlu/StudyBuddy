@@ -32,13 +32,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Matched Study Buddy"
-        android:textSize="22sp"
-        android:textColor="@color/primaryColor"
+        android:textSize="26sp"
+        android:textColor="@color/black"
+        android:shadowColor="#808080"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
         android:layout_marginTop="32dp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
     <!-- RecyclerView with better padding, rounded item style, and background -->
     <androidx.recyclerview.widget.RecyclerView

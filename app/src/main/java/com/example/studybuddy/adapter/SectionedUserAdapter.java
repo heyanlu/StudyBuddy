@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Map<String, List<User>> sectionedData;
     private List<Object> displayList;
     private Map<String, Boolean> sectionVisibilityMap;
+    private Map<String, Boolean> iconStateMap;
 
     private static final int VIEW_TYPE_HEADER = 0;
     private static final int VIEW_TYPE_USER = 1;
@@ -30,6 +32,7 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.sectionedData = sectionedData;
         this.displayList = new ArrayList<>();
         this.sectionVisibilityMap = new HashMap<>();
+        this.iconStateMap = new HashMap<>();
         buildDisplayList();
     }
 
@@ -107,8 +110,30 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
             userHolder.firstNameTextView.setText(user.getFirstName());
             userHolder.lastNameTextView.setText(user.getLastName());
             userHolder.timeTextView.setText(user.getFormattedStudyTime());
+
+            ImageView userToggleIcon = userHolder.toggleIcon;
+
+            if (iconStateMap.getOrDefault(user.getEmail(), false)) {
+                userToggleIcon.setImageResource(R.drawable.thumb_up_fill);
+            } else {
+                userToggleIcon.setImageResource(R.drawable.thumb_up_blank);
+            }
+
+            userToggleIcon.setOnClickListener(v -> {
+                boolean currentState = iconStateMap.getOrDefault(user.getEmail(), false);
+                iconStateMap.put(user.getEmail(), !currentState);
+
+                if (iconStateMap.get(user.getEmail())) {
+                    userToggleIcon.setImageResource(R.drawable.thumb_up_fill);
+                } else {
+                    userToggleIcon.setImageResource(R.drawable.thumb_up_blank);
+                }
+
+                notifyDataSetChanged();
+            });
         }
     }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -136,12 +161,14 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView firstNameTextView, lastNameTextView, timeTextView;
+        ImageView toggleIcon;
 
         UserViewHolder(View itemView) {
             super(itemView);
             firstNameTextView = itemView.findViewById(R.id.firstNameTextView);
             lastNameTextView = itemView.findViewById(R.id.lastNameTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
+            toggleIcon = itemView.findViewById(R.id.toggleIcon);
         }
     }
 }

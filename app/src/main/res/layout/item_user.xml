@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <!-- First Name TextView -->
         <TextView
             android:id="@+id/firstNameTextView"
             android:layout_width="0dp"
@@ -29,7 +28,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/lastNameTextView" />
 
-        <!-- Last Name TextView -->
         <TextView
             android:id="@+id/lastNameTextView"
             android:layout_width="0dp"
@@ -44,7 +42,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Time TextView -->
         <TextView
             android:id="@+id/timeTextView"
             android:layout_width="0dp"
@@ -60,6 +57,17 @@
             app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/toggleIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/thumb_up_blank"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
