@@ -7,7 +7,11 @@ import java.util.List;
  * Define the structure of user data based on the APIs doc
  */
 public class User {
+<<<<<<< Updated upstream
 
+=======
+    private String userID;
+>>>>>>> Stashed changes
     private String email;
     private String password;
     private String firstName;
@@ -18,8 +22,11 @@ public class User {
     private ArrayList<String> topicInterested;
     private String studyDifficultyLevel;
 
+<<<<<<< Updated upstream
     private List<String> connections;
 
+=======
+>>>>>>> Stashed changes
 
 
     public User(String email, String password, String firstName, String lastName, int age,
@@ -37,12 +44,19 @@ public class User {
         this.connections = new ArrayList<>();
     }
 
+<<<<<<< Updated upstream
     // for the Like Activity
     public User(String email) {
         this.email = email;
     }
 
 
+=======
+    public User(String userID) {
+        this.userID = userID;
+    }
+
+>>>>>>> Stashed changes
     public String getEmail() {
         return email;
     }
@@ -96,6 +110,9 @@ public class User {
     public List<String> getConnections() {
         return connections;
     }
+
+
+
 
 
 }

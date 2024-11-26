@@ -1,6 +1,4 @@
 package com.example.studybuddy.activities;
-
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +16,7 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
     //currentUserEmail should be retrieved from MatchUserActivity
     private String currentUserEmail;
     ConnectionsDB connectionsDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +48,4 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to Send Request", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

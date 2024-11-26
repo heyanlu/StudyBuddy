@@ -164,7 +164,7 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
             return new HeaderViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_user, parent, false);
+                    .inflate(R.layout.item_user_user_adaptor, parent, false);
             return new UserViewHolder(view);
         }
     }

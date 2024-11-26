@@ -12,12 +12,24 @@ import com.example.studybuddy.data.model.Connections;
 
 import java.util.ArrayList;
 
+import com.example.studybuddy.data.model.Connections;
+import com.example.studybuddy.data.model.User;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ConnectionsDB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Connections.db";
     public static final String TABLE_NAME = "Connections";
     public static final String COL_1 = "ID";
+<<<<<<< Updated upstream
     public static final String COL_2 = "SENDER_EMAIL";
     public static final String COL_3 = "RECEIVER_EMAIL";
+=======
+    public static final String COL_2 = "SENDER_ID";
+    public static final String COL_3 = "RECEIVER_ID";
+>>>>>>> Stashed changes
     public static final String COL_4 = "STATUS";
 
     public ConnectionsDB(Context context) {
@@ -62,15 +74,22 @@ public class ConnectionsDB extends SQLiteOpenHelper {
     }
 
 
+<<<<<<< Updated upstream
     public ArrayList<Connections> getConnectionRequests(String receiverEmail) {
         if (receiverEmail == null) {
             Log.e("ConnectionsDB", "receiverEmail is null. Returning empty list.");
             return new ArrayList<>();
         }
+=======
+
+  //This method is used to show all the "likes" when clicking "Like"
+    public ArrayList<Connections> getConnectionRequests(String receiverID) {
+>>>>>>> Stashed changes
         ArrayList<Connections> connections = new ArrayList<>();
         SQLiteDatabase connectDB = this.getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_3 + " = ?";
+<<<<<<< Updated upstream
         Cursor cursor = connectDB.rawQuery(query, new String[]{receiverEmail});
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -79,10 +98,25 @@ public class ConnectionsDB extends SQLiteOpenHelper {
                 @SuppressLint("Range") String status = cursor.getString(cursor.getColumnIndex(COL_4));
                 Connections c = new Connections(connectionID, senderEmail, receiverEmail, status);
                 connections.add(c);
+=======
+        Cursor cursor = connectDB.rawQuery(query, new String[]{receiverID});
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String connectionID = cursor.getString(cursor.getColumnIndex(COL_1));
+                @SuppressLint("Range") String senderID = cursor.getString(cursor.getColumnIndex(COL_2));
+                @SuppressLint("Range") String status = cursor.getString(cursor.getColumnIndex(COL_4));
+                Connections c = new Connections(connectionID, senderID, receiverID, status);
+                connections.add(c);
+                cursor.close();
+>>>>>>> Stashed changes
             } while (cursor.moveToNext());
             cursor.close();
         }
         connectDB.close();
         return connections;
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }

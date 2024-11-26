@@ -382,6 +382,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //For users to see the person's profile who likes them
+<<<<<<< Updated upstream
     public User getUserInfoByEmail(String userEmail) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
@@ -389,6 +390,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         User user = null;
         if (cursor != null && cursor.moveToFirst()) {
             do {
+=======
+    public User getUserInfoByID(String userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_1 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{userID});
+        User user = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COL_2));
+>>>>>>> Stashed changes
                 @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(COL_3));
                 @SuppressLint("Range") String firstName = cursor.getString(cursor.getColumnIndex(COL_4));
                 @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COL_5));
@@ -412,7 +423,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         topicsList.add(topic.trim());
                     }
                 }
+<<<<<<< Updated upstream
                 user = new User(userEmail, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+=======
+                user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+>>>>>>> Stashed changes
             } while (cursor.moveToNext());
             cursor.close();
         }
