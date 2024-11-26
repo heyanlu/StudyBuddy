@@ -102,7 +102,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     //Insert new user when signup
     public boolean insertUser(String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -198,7 +197,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     public ArrayList<User> getUsersWithSameTopics(List<String> currentUserTopics) {
         ArrayList<User> users = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -271,7 +269,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return users;
     }
-
 
 
     public ArrayList<User> getUsersWithSameTopics(List<String> userTopics, String currentUserEmail) {
@@ -350,7 +347,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     //Check if the user is already set up
     public boolean isSetUp(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -373,7 +369,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Get User ID (for sending connect request）
     @SuppressLint("Range")
     public String getUserIDByEmail(String email) {
-        ArrayList<String> topics = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String userID = "";
         String query = "SELECT " + COL_1 + " FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
@@ -383,8 +378,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         }
         db.close();
-
         return userID;
     }
-}
 
+    //For users to see the person's profile who likes them
+    public User getUserInfoByID(String userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_1 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{userID});
+        User user = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COL_2));
+                @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(COL_3));
+                @SuppressLint("Range") String firstName = cursor.getString(cursor.getColumnIndex(COL_4));
+                @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COL_5));
+                @SuppressLint("Range") int age = cursor.getInt(cursor.getColumnIndex(COL_6));
+                @SuppressLint("Range") String gender = cursor.getString(cursor.getColumnIndex(COL_7));
+                @SuppressLint("Range") String studyTime = cursor.getString(cursor.getColumnIndex(COL_8));
+                @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
+                @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
+                ArrayList<String> studyTimeList = new ArrayList<>();
+                if (studyTime != null && !studyTime.isEmpty()) {
+                    String[] studyTimeArray = studyTime.split(",");
+                    for (String time : studyTimeArray) {
+                        studyTimeList.add(time.trim());
+                    }
+                }
+
+                ArrayList<String> topicsList = new ArrayList<>();
+                if (topics != null && !topics.isEmpty()) {
+                    String[] topicsArray = topics.split(",");
+                    for (String topic : topicsArray) {
+                        topicsList.add(topic.trim());
+                    }
+                }
+                user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return user;
+    }
+
+}

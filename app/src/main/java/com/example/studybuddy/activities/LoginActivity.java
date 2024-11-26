@@ -90,15 +90,18 @@ public class LoginActivity extends AppCompatActivity {
 
             boolean isValid = dbHelper.validateUser(email, password);
             if (isValid) {
+
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("userEmail", email);
                 editor.apply();
-                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
 
                 //store userID and pass it to ShowUserProfile for connecting purpose
                 String userID = dbHelper.getUserIDByEmail(email);
                 editor.putString("userID", userID);
                 editor.apply();
+
+                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                 boolean isSetUp = dbHelper.isSetUp(email);
                 Intent intent;

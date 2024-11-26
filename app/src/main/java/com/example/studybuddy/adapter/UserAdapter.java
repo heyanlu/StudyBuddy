@@ -1,5 +1,6 @@
 package com.example.studybuddy.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,46 +12,56 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.studybuddy.R;
 import com.example.studybuddy.data.model.User;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private ArrayList<User> userList;
+    private final List<User> userList;
 
-
-    public UserAdapter(ArrayList<User> userList) {
+    // Constructor
+    public UserAdapter(List<User> userList) {
         this.userList = userList;
     }
 
+    // ViewHolder class to hold the views for each item
+    public static class UserViewHolder extends RecyclerView.ViewHolder {
+        TextView nameTextView;
+        TextView emailTextView;
+        TextView ageTextView;
+        TextView genderTextView;
+
+        public UserViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nameTextView = itemView.findViewById(R.id.nameTextView);
+            emailTextView = itemView.findViewById(R.id.emailTextView);
+            ageTextView = itemView.findViewById(R.id.ageTextView);
+            genderTextView = itemView.findViewById(R.id.genderTextView);
+        }
+    }
 
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
+        // Inflate the item layout
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_user_adaptor, parent, false);
         return new UserViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(UserViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+        // Get the current user
         User user = userList.get(position);
-        holder.firstName.setText(user.getFirstName());
-        holder.lastName.setText(user.getLastName());
-        holder.studyTime.setText(user.getFormattedStudyTime());
+
+        // Bind data to the views
+        holder.nameTextView.setText(user.getFirstName() + " " + user.getLastName());
+        holder.emailTextView.setText(user.getEmail());
+        holder.ageTextView.setText("Age: " + user.getAge());
+        holder.genderTextView.setText("Gender: " + user.getGender());
     }
 
     @Override
     public int getItemCount() {
-        return userList.size();
-    }
-
-    public class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView firstName, lastName, studyTime;
-
-        public UserViewHolder(View itemView) {
-            super(itemView);
-            firstName = itemView.findViewById(R.id.firstNameTextView);
-            lastName = itemView.findViewById(R.id.lastNameTextView);
-            studyTime = itemView.findViewById(R.id.timeTextView);
-        }
+        return userList.size(); // Number of users to display
     }
 }

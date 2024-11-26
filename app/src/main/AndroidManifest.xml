@@ -79,6 +79,11 @@
             android:name=".activities.SettingActivity"
             android:exported="true"
             android:label="genai" />
+
+        <activity
+            android:name=".activities.LikesActivity"
+            android:exported="true"
+            android:label="genai" />
     </application>
 
 </manifest>

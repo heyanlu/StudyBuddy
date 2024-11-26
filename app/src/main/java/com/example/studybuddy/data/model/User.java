@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Define the structure of user data based on the APIs doc
  */
 public class User {
+    private String userID;
     private String email;
     private String password;
     private String firstName;
@@ -15,6 +16,8 @@ public class User {
     private ArrayList<String> preferredStudyTime;
     private ArrayList<String> topicInterested;
     private String studyDifficultyLevel;
+
+
 
     public User(String email, String password, String firstName, String lastName, int age,
                 String gender, ArrayList<String> preferredStudyTime, ArrayList<String> topicInterested,
@@ -28,6 +31,10 @@ public class User {
         this.preferredStudyTime = preferredStudyTime;
         this.topicInterested = topicInterested;
         this.studyDifficultyLevel = studyDifficultyLevel;
+    }
+
+    public User(String userID) {
+        this.userID = userID;
     }
 
     public String getEmail() {
@@ -69,6 +76,9 @@ public class User {
     public ArrayList<String> getTopicInterested() {
         return topicInterested;
     }
+
+
+
 
 
 }
