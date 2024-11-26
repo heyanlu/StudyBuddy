@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="@drawable/background9">
+    android:background="@drawable/background11">
 
     <!-- Main Content -->
     <ScrollView
