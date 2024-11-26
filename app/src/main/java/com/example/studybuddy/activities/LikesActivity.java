@@ -1,4 +1,5 @@
 package com.example.studybuddy.activities;
+import android.view.MenuItem;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +23,7 @@ import com.example.studybuddy.data.database.ConnectionsDB;
 import com.example.studybuddy.data.database.DatabaseHelper;
 import com.example.studybuddy.data.model.Connections;
 import com.example.studybuddy.data.model.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,27 +41,30 @@ public class LikesActivity extends AppCompatActivity {
         //Get all the current user's likes from connectionsDB
         ConnectionsDB connectionsDB = new ConnectionsDB(this);
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String myUserID = sharedPreferences.getString("userID", null);
-        if (myUserID != null) {
-            Log.d("LikeActivity", "userID: " + myUserID);
+        String myUserEmail = sharedPreferences.getString("userEmail", null);
+        if (myUserEmail != null) {
+            Log.d("LikeActivity", "userEmail: " + myUserEmail);
         } else {
-            Log.e("LikesActivity", "userID is null. Cannot retrieve connections.");
-            Toast.makeText(this, "UserID not found!. Please log in again.", Toast.LENGTH_SHORT).show();
+            Log.e("LikesActivity", "userEmail is null. Cannot retrieve connections.");
+            Toast.makeText(this, "userEmail not found!. Please log in again.", Toast.LENGTH_SHORT).show();
             return;
         }
-        List<Connections> likes = connectionsDB.getConnectionRequests(myUserID);
+        List<Connections> likes = connectionsDB.getConnectionRequests(myUserEmail);
 
         //Convert "likes" into users
         List<User> users = new ArrayList<>();
         for (Connections like : likes) {
-            String senderID = like.getSenderEmail();
+            String senderEmail = like.getSenderEmail();
             DatabaseHelper db = new DatabaseHelper(this);
-            User user = db.getUserInfoByID(senderID);
+            // create user by his email
+            User user = db.getUserInfoByEmail(senderEmail);
             users.add(user);
         }
         //Create Adapter
         UserAdapter adapter = new UserAdapter(users);
         recyclerView.setAdapter(adapter);
-    }
 
+    }
 }
+
+

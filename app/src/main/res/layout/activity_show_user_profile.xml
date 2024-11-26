@@ -11,30 +11,16 @@
         android:id="@+id/connect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:background="#673AB7"
         android:padding="5dp"
-        android:text="Connect Friend"
+        android:text="Connect"
         android:textColor="@color/backgroundColor"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="HardcodedText,MissingConstraints,SpUsage"
          />
-
-    <Button
-        android:id="@+id/returnBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:background="#673AB7"
-        android:padding="5dp"
-        android:text="Return to Previous Page"
-        android:textColor="@color/backgroundColor"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="HardcodedText,MissingConstraints,SpUsage"
-        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

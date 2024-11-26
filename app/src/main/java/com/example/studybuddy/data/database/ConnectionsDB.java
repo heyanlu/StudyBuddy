@@ -21,7 +21,8 @@ public class ConnectionsDB extends SQLiteOpenHelper {
     public static final String COL_4 = "STATUS";
 
     public ConnectionsDB(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        //changed to version 3
+        super(context, DATABASE_NAME, null, 3);
     }
 
     @Override
@@ -39,19 +40,20 @@ public class ConnectionsDB extends SQLiteOpenHelper {
     public boolean insertConnectionRequest(String senderEmail, String receiverEmail) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ? AND " + COL_3 + " = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{senderEmail, receiverEmail});
-
-        if (cursor != null && cursor.moveToFirst()) {
-            cursor.close();
-            db.close();
-            return false;
-        }
+        //不需要
+//        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
+//        Cursor cursor = db.rawQuery(query, new String[]{senderEmail});
+//
+//        if (cursor != null && cursor.moveToFirst()) {
+//            cursor.close();
+//            db.close();
+//            return false;
+//        }
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, senderEmail);
         contentValues.put(COL_3, receiverEmail);
-        contentValues.put(COL_4, "Pending");
+        contentValues.put(COL_4, "Sent");
 
         long result = db.insert(TABLE_NAME, null, contentValues);
         db.close();

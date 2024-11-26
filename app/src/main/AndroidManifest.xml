@@ -84,6 +84,7 @@
             android:name=".activities.LikesActivity"
             android:exported="true"
             android:label="genai" />
+
     </application>
 
 </manifest>

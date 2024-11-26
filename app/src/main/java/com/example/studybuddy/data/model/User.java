@@ -7,7 +7,7 @@ import java.util.List;
  * Define the structure of user data based on the APIs doc
  */
 public class User {
-    private String userID;
+
     private String email;
     private String password;
     private String firstName;
@@ -37,9 +37,11 @@ public class User {
         this.connections = new ArrayList<>();
     }
 
-    public User(String userID) {
-        this.userID = userID;
+    // for the Like Activity
+    public User(String email) {
+        this.email = email;
     }
+
 
     public String getEmail() {
         return email;

@@ -14,9 +14,9 @@ import com.example.studybuddy.R;
 import com.example.studybuddy.data.database.ConnectionsDB;
 
 public class ShowOtherUserProfileActivity extends AppCompatActivity {
-    //Need to fix otherUserID.
-    //otherUserID should be the ID retrieved from MatchUserActivity
-    private String otherUserID;
+    //Notes for Aarzoo:
+    //currentUserEmail should be retrieved from MatchUserActivity
+    private String currentUserEmail;
     ConnectionsDB connectionsDB;
 
     @Override
@@ -28,30 +28,21 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         connectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendConnectionRequest(otherUserID);
-            }
-        });
-
-        Button returnBtn = findViewById(R.id.returnBtn);
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ShowOtherUserProfileActivity.this, MatchUserActivity.class);
-                startActivity(intent);
-                finish();
+                sendConnectionRequest(currentUserEmail);
             }
         });
     }
-    private void sendConnectionRequest(String receiverID) {
-        // Retrieve userID from Login Activity
-        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPrefs", MODE_PRIVATE);
-        String myUserID = sharedPreferences.getString("userID", null);
-        if (myUserID != null) {
-            Log.d("ShowOtherProfileActivity", "userID: " + myUserID);
+
+    private void sendConnectionRequest(String receiverEmail) {
+        // Retrieve userEmail from Login Activity
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String myUserEmail = sharedPreferences.getString("userEmail", null);
+        if (myUserEmail != null) {
+            Log.d("ShowOtherProfileActivity", "userEmail: " + myUserEmail);
         } else {
-            Toast.makeText(this, "UserID not found!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Your Email not found!", Toast.LENGTH_SHORT).show();
         }
-        boolean success = connectionsDB.insertConnectionRequest(myUserID, receiverID);
+        boolean success = connectionsDB.insertConnectionRequest(myUserEmail, receiverEmail);
         if (success) {
             Toast.makeText(this, "Request Sent", Toast.LENGTH_SHORT).show();
         } else {
