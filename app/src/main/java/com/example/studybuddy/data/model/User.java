@@ -1,6 +1,7 @@
 package com.example.studybuddy.data.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Define the structure of user data based on the APIs doc
@@ -17,6 +18,8 @@ public class User {
     private ArrayList<String> topicInterested;
     private String studyDifficultyLevel;
 
+    private List<String> connections;
+
 
 
     public User(String email, String password, String firstName, String lastName, int age,
@@ -31,6 +34,7 @@ public class User {
         this.preferredStudyTime = preferredStudyTime;
         this.topicInterested = topicInterested;
         this.studyDifficultyLevel = studyDifficultyLevel;
+        this.connections = new ArrayList<>();
     }
 
     public User(String userID) {
@@ -77,8 +81,19 @@ public class User {
         return topicInterested;
     }
 
+    public void addConnection(String email) {
+        if (!connections.contains(email)) {
+            connections.add(email);
+        }
+    }
 
+    public void removeConnection(String email) {
+        connections.remove(email);
+    }
 
+    public List<String> getConnections() {
+        return connections;
+    }
 
 
 }

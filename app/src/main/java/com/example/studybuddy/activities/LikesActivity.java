@@ -51,7 +51,7 @@ public class LikesActivity extends AppCompatActivity {
         //Convert "likes" into users
         List<User> users = new ArrayList<>();
         for (Connections like : likes) {
-            String senderID = like.getSenderID();
+            String senderID = like.getSenderEmail();
             DatabaseHelper db = new DatabaseHelper(this);
             User user = db.getUserInfoByID(senderID);
             users.add(user);

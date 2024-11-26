@@ -4,24 +4,23 @@ import java.util.ArrayList;
 
 public class Connections {
     private String connectionID;
-    private String senderID;
-    private String receiverID;
+    private String senderEmail;
+    private String receiverEmail;
     private String status;
 
-    public Connections (String connectionID, String senderID, String receiverID, String status) {
+    public Connections(String connectionID, String senderEmail, String receiverEmail, String status) {
         this.connectionID = connectionID;
-        this.senderID = senderID;
-        this.receiverID = receiverID;
+        this.senderEmail = senderEmail;
+        this.receiverEmail = receiverEmail;
         this.status = status;
     }
 
-
-    public String getSenderID() {
-        return senderID;
+    public String getSenderEmail() {
+        return senderEmail;
     }
 
-    public void setSenderID(String senderID) {
-        this.senderID = senderID;
+    public void setSenderEmail(String senderEmail) {
+        this.senderEmail = senderEmail;
     }
 
     public String getConnectionID() {
@@ -32,12 +31,12 @@ public class Connections {
         this.connectionID = connectionID;
     }
 
-    public String getReceiverID() {
-        return receiverID;
+    public String getReceiverEmail() {
+        return receiverEmail;
     }
 
-    public void setReceiverID(String receiverID) {
-        this.receiverID = receiverID;
+    public void setReceiverEmail(String receiverEmail) {
+        this.receiverEmail = receiverEmail;
     }
 
     public String getStatus() {

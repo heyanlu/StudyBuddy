@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studybuddy.R;
+import com.example.studybuddy.data.database.ConnectionsDB;
 import com.example.studybuddy.data.model.User;
 
 import java.util.ArrayList;
@@ -115,6 +117,16 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             if (iconStateMap.getOrDefault(user.getEmail(), false)) {
                 userToggleIcon.setImageResource(R.drawable.thumb_up_fill);
+
+                String currentUserEmail = user.getEmail();
+
+                ConnectionsDB connectionsDB = new ConnectionsDB(userHolder.itemView.getContext());
+
+                boolean isConnected = connectionsDB.insertConnectionRequest(currentUserEmail, user.getEmail());
+
+                if (isConnected) {
+                    Log.d("SectionedUserAdapter", "Connection request sent between " + currentUserEmail + " and " + user.getEmail());
+                }
             } else {
                 userToggleIcon.setImageResource(R.drawable.thumb_up_blank);
             }
@@ -125,14 +137,23 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                 if (iconStateMap.get(user.getEmail())) {
                     userToggleIcon.setImageResource(R.drawable.thumb_up_fill);
+
+                    String currentUserEmail = user.getEmail();
+                    // Use itemView.getContext() to get the context
+                    ConnectionsDB connectionsDB = new ConnectionsDB(v.getContext());
+
+                    boolean isConnected = connectionsDB.insertConnectionRequest(currentUserEmail, user.getEmail());
+
+                    if (isConnected) {
+                        Log.d("SectionedUserAdapter", "Connection request sent between " + currentUserEmail + " and " + user.getEmail());
+                    }
                 } else {
                     userToggleIcon.setImageResource(R.drawable.thumb_up_blank);
                 }
-
-                notifyDataSetChanged();
             });
         }
     }
+
 
 
     @Override
