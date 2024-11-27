@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setSelectedItemId(R.id.nav_matched_buddies);
 
     }
-    MatchUserFragment matchUserFragment = new MatchUserFragment();
+//    MatchUserFragment matchUserFragment = new MatchUserFragment();
     LikeFragment likeFragment = new LikeFragment();
     GenAiFragment genAiFragment = new GenAiFragment();
     AccountFragment accountFragment = new AccountFragment();
@@ -35,26 +35,28 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            if (item.getItemId() == R.id.nav_matched_buddies) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, matchUserFragment)
-                        .commit();
-                return true;
-            } else
+//            if (item.getItemId() == R.id.nav_matched_buddies) {
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.fragment_container, matchUserFragment)
+//                        .commit();
+//                return true;
+//            } else
                 if (item.getItemId() == R.id.nav_likes) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, likeFragment)
                         .commit();
                 return true;
-            } else if (item.getItemId() == R.id.nav_genai) {
+            } else
+                if (item.getItemId() == R.id.nav_genai) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, genAiFragment)
                         .commit();
                 return true;
-            } else if (item.getItemId() == R.id.nav_account) {
+            }
+                else if (item.getItemId() == R.id.nav_account) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, accountFragment)

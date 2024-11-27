@@ -94,15 +94,15 @@ public class MatchUserActivity extends AppCompatActivity {
 //        });
     }
 
-    private void openLikesPage() {
-        startActivity(new Intent(MatchUserActivity.this, LikesActivity.class));
-    }
-
-    private void openGenAIPage() {
-        startActivity(new Intent(MatchUserActivity.this, GenAIActivity.class));
-    }
-
-    private void openAccountPage() {
-        startActivity(new Intent(MatchUserActivity.this, AccountActivity.class));
-    }
+//    private void openLikesPage() {
+//        startActivity(new Intent(MatchUserActivity.this, LikesActivity.class));
+//    }
+//
+//    private void openGenAIPage() {
+//        startActivity(new Intent(MatchUserActivity.this, GenAIActivity.class));
+//    }
+//
+//    private void openAccountPage() {
+//        startActivity(new Intent(MatchUserActivity.this, ShowOtherUserProfileActivity.class));
+//    }
 }

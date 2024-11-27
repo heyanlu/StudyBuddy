@@ -12,11 +12,13 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.studybuddy.R;
 
 public class AccountFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -24,6 +26,16 @@ public class AccountFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_account, container, false);
+
+        Button logoutButton = view.findViewById(R.id.logoutButton);
+
+        logoutButton.setOnClickListener(v -> logout());
+        return view;
+    }
+
+    private void logout() {
+        Log.d("AccountActivity", "Logging out...");
+
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("userEmail");
@@ -31,15 +43,11 @@ public class AccountFragment extends Fragment {
 
         Log.d("AccountActivity", "User data cleared. Navigating to LoginActivity.");
 
-        Button logout = view.findViewById(R.id.logoutButton);
-        logout.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            requireActivity().finish();
-        });
+        Intent intent = new Intent(requireContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
 
-
-        return view;
+        requireActivity().finish();
     }
 }
+
