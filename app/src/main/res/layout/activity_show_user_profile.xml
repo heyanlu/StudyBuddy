@@ -13,9 +13,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="666dp"
+            android:layout_height="49dp">
+
+            <ImageView
+                android:id="@+id/returnBtn"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="53dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="332dp"
+            android:layout_height="629dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp">
 
@@ -50,9 +68,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:textSize="16sp"
-                android:text="TextView"
                 android:gravity="center_horizontal"
+                android:text="TextView"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +81,8 @@
                 android:layout_width="327dp"
                 android:layout_height="68dp"
                 android:layout_marginTop="7dp"
+                android:layout_marginBottom="17dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/occupation">
@@ -71,14 +91,29 @@
                     android:id="@+id/connect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button"
+                    android:gravity="center"
+                    android:text="Connect"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="131dp"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="329dp"
+                android:layout_height="299dp"
+                tools:layout_editor_absoluteY="252dp">
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 </ScrollView>

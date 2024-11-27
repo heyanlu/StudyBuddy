@@ -388,12 +388,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userID;
     }
 
-    //For users to see the person's profile who likes them
-    public User getUserInfoByEmail(String userEmail) {
+//    //For users to see the person's profile who likes them
+//    public User getUserInfoByEmail(String userEmail) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
+//        Cursor cursor = db.rawQuery(query, new String[]{userEmail});
+//        User user = null;
+//        if (cursor != null && cursor.moveToFirst()) {
+//            do {
+//                @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COL_2));
+//                @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(COL_3));
+//                @SuppressLint("Range") String firstName = cursor.getString(cursor.getColumnIndex(COL_4));
+//                @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COL_5));
+//                @SuppressLint("Range") int age = cursor.getInt(cursor.getColumnIndex(COL_6));
+//                @SuppressLint("Range") String gender = cursor.getString(cursor.getColumnIndex(COL_7));
+//                @SuppressLint("Range") String studyTime = cursor.getString(cursor.getColumnIndex(COL_8));
+//                @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
+//                @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
+//                //@SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
+//                ArrayList<String> studyTimeList = new ArrayList<>();
+//                if (studyTime != null && !studyTime.isEmpty()) {
+//                    String[] studyTimeArray = studyTime.split(",");
+//                    for (String time : studyTimeArray) {
+//                        studyTimeList.add(time.trim());
+//                    }
+//                }
+//
+//                ArrayList<String> topicsList = new ArrayList<>();
+//                if (topics != null && !topics.isEmpty()) {
+//                    String[] topicsArray = topics.split(",");
+//                    for (String topic : topicsArray) {
+//                        topicsList.add(topic.trim());
+//                    }
+//                }
+//                user = new User(userEmail, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+//            } while (cursor.moveToNext());
+//            cursor.close();
+//        }
+//        db.close();
+//        return user;
+//    }
+
+    public User getUserInfoByEmail(String emailId){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{userEmail});
+        String query = "SELECT * FROM "+ TABLE_NAME +" WHERE " + COL_2 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{emailId});
         User user = null;
+
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COL_2));
@@ -421,12 +462,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         topicsList.add(topic.trim());
                     }
                 }
-                user = new User(userEmail, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+                //user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty, occupation);
+                user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
             } while (cursor.moveToNext());
             cursor.close();
         }
         db.close();
         return user;
+
+
     }
 
 }
