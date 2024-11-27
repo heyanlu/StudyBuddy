@@ -17,12 +17,6 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        Button logoutButton = findViewById(R.id.logoutButton);
-
-        logoutButton.setOnClickListener(view -> logout());
-    }
-
-    private void logout() {
         Log.d("AccountActivity", "Logging out...");
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -32,11 +26,15 @@ public class AccountActivity extends AppCompatActivity {
 
         Log.d("AccountActivity", "User data cleared. Navigating to LoginActivity.");
 
-        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        Button logout = findViewById(R.id.logoutButton);
+        logout.setOnClickListener(view -> {
+            Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
 
-        finish();
+
     }
 }
 
