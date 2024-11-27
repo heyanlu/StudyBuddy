@@ -9,8 +9,14 @@
 
     <!-- Main Content (ScrollView for dynamic height) -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="356dp"
-        android:layout_height="68dp">
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp">
 
         <LinearLayout
             android:layout_width="356dp"
@@ -66,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="What is your preferred topic?"
+                android:text="@string/topic_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -79,11 +85,15 @@
 
     <ScrollView
         android:id="@+id/myScrollView"
-        android:layout_width="371dp"
-        android:layout_height="457dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_above="@+id/buttonNext"
         android:layout_below="@+id/constraintLayout5"
-        android:layout_marginTop="2dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="16dp">
 
         <LinearLayout
