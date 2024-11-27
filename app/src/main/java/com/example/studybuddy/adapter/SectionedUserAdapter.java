@@ -1,5 +1,8 @@
 package com.example.studybuddy.adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studybuddy.R;
+import com.example.studybuddy.activities.ShowOtherUserProfileActivity;
 import com.example.studybuddy.data.database.ConnectionsDB;
 import com.example.studybuddy.data.model.User;
 
@@ -108,12 +113,24 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
             });
         } else {
             User user = (User) displayList.get(position);
+            Log.println(Log.WARN, "user data recycler", user.getEmail());
             UserViewHolder userHolder = (UserViewHolder) holder;
-            userHolder.firstNameTextView.setText(user.getFirstName());
+            userHolder.firstNameTextView.setText(user.getFirstName()+" "+user.getLastName());
             userHolder.lastNameTextView.setText(user.getLastName());
             userHolder.timeTextView.setText(user.getFormattedStudyTime());
 
             ImageView userToggleIcon = userHolder.toggleIcon;
+
+            userHolder.firstNameTextView.setOnClickListener(v -> {
+                Log.println(Log.INFO, "user data recycler after click ", user.getEmail());
+                Intent intent = new Intent(v.getContext(), ShowOtherUserProfileActivity.class);
+                intent.putExtra("email", user.getEmail());
+                intent.putExtra("firstName", user.getFirstName());
+                intent.putExtra("lastName", user.getLastName());
+                intent.putExtra("topics", user.getTopicInterested());
+
+                v.getContext().startActivity(intent);
+            });
 
             if (iconStateMap.getOrDefault(user.getEmail(), false)) {
                 userToggleIcon.setImageResource(R.drawable.thumb_up_fill);

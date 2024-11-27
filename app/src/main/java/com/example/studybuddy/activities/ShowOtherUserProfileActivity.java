@@ -1,28 +1,45 @@
 package com.example.studybuddy.activities;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studybuddy.R;
 import com.example.studybuddy.data.database.ConnectionsDB;
+import com.example.studybuddy.data.database.DatabaseHelper;
+import com.example.studybuddy.data.model.User;
+
+import java.util.ArrayList;
 
 public class ShowOtherUserProfileActivity extends AppCompatActivity {
     //Notes for Aarzoo:
     //currentUserEmail should be retrieved from MatchUserActivity
     private String currentUserEmail;
     ConnectionsDB connectionsDB;
-
+    DatabaseHelper db ;
+    TextView userName;
+    private String otherUserEmail;
+    User user; //This is the user who we want to send the connection request
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_user_profile);
         connectionsDB = new ConnectionsDB(this);
+        db = new DatabaseHelper(this);
+        userName = findViewById(R.id.userName);
+
+
+
         Button connectBtn = findViewById(R.id.connect);
         connectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +47,29 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
                 sendConnectionRequest(currentUserEmail);
             }
         });
+
+        ImageView returnBtn = findViewById(R.id.returnBtn);
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowOtherUserProfileActivity.this, MatchUserActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        Intent intent = getIntent();
+        otherUserEmail = intent.getStringExtra("email");
+
+        user = db.getUserInfoByEmail(intent.getStringExtra("email"));
+        userName.setText(user.getFirstName() +" "+user.getLastName());
+
+
+        Log.println(Log.INFO, "email address in show user profile", otherUserEmail+" "+intent.getStringExtra("email"));
     }
+
+
+
 
     private void sendConnectionRequest(String receiverEmail) {
         // Retrieve userEmail from Login Activity

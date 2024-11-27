@@ -103,6 +103,6 @@ public class MatchUserActivity extends AppCompatActivity {
     }
 
     private void openAccountPage() {
-        startActivity(new Intent(MatchUserActivity.this, ShowOtherUserProfileActivity.class));
+        startActivity(new Intent(MatchUserActivity.this, AccountActivity.class));
     }
 }

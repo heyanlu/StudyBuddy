@@ -104,6 +104,19 @@ public class User {
         }
     }
 
+    public void setOccupation(String occupation){
+        this.occupation = occupation;
+    }
+
+    public String getOccupation(){
+        return this.occupation;
+    }
+
+    public String getUserID(){
+        return this.userID;
+    }
+
+
     public void removeConnection(String email) {
         connections.remove(email);
     }
