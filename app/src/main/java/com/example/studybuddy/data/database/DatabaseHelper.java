@@ -82,6 +82,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
+    /**
+     * This function check if the user is already present in the system.
+     * @param email - user email
+     * @return - true if the user is already a member, otherwise false
+     */
+    public boolean checkIfUserAlreadyPresent(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
+        String[] args = {email};
+
+        Cursor cursor = db.rawQuery(query, args);
+        boolean isUserPresent = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return isUserPresent;
+    }
+
+
     // Method to update user's study time preference
     public boolean updateUserStudyTime(String email, String studyTimePreference) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -105,8 +123,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //Insert new user when signup
+    /**
+     * This function is used to add user to the database when they signup
+     * @param email - email address of the user
+     * @param password - password of the user
+     * @return - true if the user is added successfully otherwise returns false.
+     */
     public boolean insertUser(String email, String password) {
+        boolean userPresent = this.checkIfUserAlreadyPresent(email); //This is used to check if there is a user already present with the existing email
+        if(userPresent){
+            return false;
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, email);

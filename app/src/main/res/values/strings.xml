@@ -11,7 +11,7 @@
 
     <!--Sign Up Page Attribute names -->
     <string name="create_an_account">Create Account</string>
-    <string name="username_hint">Full Name</string>
+    <string name="username_hint">Username</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="signup_button">Sign Up</string>
     <string name="password">password</string>

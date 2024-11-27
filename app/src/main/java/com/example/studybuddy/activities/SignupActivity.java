@@ -51,7 +51,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
         buttonSignup.setOnClickListener(view -> {
-            String email = editTextEmail.getText().toString().trim();
+            String email = editTextEmail.getText().toString().trim().toLowerCase();
             String password = passwordEditText.getText().toString().trim();
             String confirmPassword = confirmPasswordEditText.getText().toString().trim();
             String name = userFullName.getText().toString().trim();
@@ -83,7 +83,7 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                Toast.makeText(SignupActivity.this, "Sign Up Failed, email might already be in use", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignupActivity.this, "The email already exists. Please login!", Toast.LENGTH_SHORT).show();
             }
         });
 

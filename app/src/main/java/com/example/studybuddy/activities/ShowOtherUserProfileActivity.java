@@ -48,15 +48,6 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
             }
         });
 
-        ImageView returnBtn = findViewById(R.id.returnBtn);
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ShowOtherUserProfileActivity.this, MatchUserActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         Intent intent = getIntent();
         otherUserEmail = intent.getStringExtra("email");

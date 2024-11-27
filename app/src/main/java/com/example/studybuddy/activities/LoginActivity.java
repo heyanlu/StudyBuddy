@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
 
+        //Click on this link will enable user to signup
         signUpLink = findViewById(R.id.signUpLink);
         String htmlText = "Don't have an account?  <font color='#3344DD'>Sign up here!</font>";
         signUpLink.setText(Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY));
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         buttonLogin.setOnClickListener(view -> {
-            email = editTextLoginEmail.getText().toString();
+            email = editTextLoginEmail.getText().toString().toLowerCase();
             String password = editTextLoginPassword.getText().toString();
 
             if (email.isEmpty() || password.isEmpty()) {

@@ -44,7 +44,7 @@ public class DifficultyPreferenceActivity extends AppCompatActivity {
                     Toast.makeText(this, "Study difficulty preferences updated successfully!", Toast.LENGTH_SHORT).show();
                     databaseHelper.set_setUp(userEmail); //set setUp = 1
 //                    startActivity(new Intent(this, MatchUserActivity.class));
-                    startActivity(new Intent(this, MatchUserActivity.class));
+                    startActivity(new Intent(this, MainActivity.class));
 
                     finish();
                 } else {
