@@ -187,6 +187,7 @@
                 android:layout_marginTop="28dp"
                 android:layout_marginBottom="181dp"
                 android:text="@string/signup_button"
+                android:backgroundTint="@color/primaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

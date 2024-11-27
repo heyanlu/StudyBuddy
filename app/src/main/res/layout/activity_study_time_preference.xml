@@ -61,74 +61,74 @@
             <!-- Study Time Selection Section -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="465dp"
                 android:orientation="vertical">
 
                 <!-- Weekday Study Time -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="Weekdays"
-                    android:textSize="16sp"
                     android:textColor="#333333"
-                    android:layout_marginTop="16dp" />
+                    android:textSize="16sp" />
 
                 <CheckBox
                     android:id="@+id/checkWeekdayMorning"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Weekday Morning"
-                    android:textSize="16sp"
-                    android:textColor="#333333" />
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
 
                 <CheckBox
                     android:id="@+id/checkWeekdayAfternoon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Weekday Afternoon"
-                    android:textSize="16sp"
-                    android:textColor="#333333" />
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
 
                 <CheckBox
                     android:id="@+id/checkWeekdayEvening"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Weekday Evening"
-                    android:textSize="16sp"
-                    android:textColor="#333333" />
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
 
                 <!-- Weekend Study Time -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="Weekends"
-                    android:textSize="16sp"
                     android:textColor="#333333"
-                    android:layout_marginTop="16dp" />
+                    android:textSize="16sp" />
 
                 <CheckBox
                     android:id="@+id/checkWeekendMorning"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Weekend Morning"
-                    android:textSize="16sp"
-                    android:textColor="#333333" />
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
 
                 <CheckBox
                     android:id="@+id/checkWeekendAfternoon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Weekend Afternoon"
-                    android:textSize="16sp"
-                    android:textColor="#333333" />
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
 
                 <CheckBox
                     android:id="@+id/checkWeekendEvening"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Weekend Evening"
-                    android:textSize="16sp"
-                    android:textColor="#333333" />
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

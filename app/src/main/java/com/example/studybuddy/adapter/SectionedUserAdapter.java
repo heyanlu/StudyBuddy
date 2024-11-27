@@ -116,11 +116,12 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
             Log.println(Log.WARN, "user data recycler", user.getEmail());
             UserViewHolder userHolder = (UserViewHolder) holder;
             userHolder.firstNameTextView.setText(user.getFirstName()+" "+user.getLastName());
-            userHolder.lastNameTextView.setText(user.getLastName());
+            //userHolder.lastNameTextView.setText(user.getLastName());
             userHolder.timeTextView.setText(user.getFormattedStudyTime());
 
             ImageView userToggleIcon = userHolder.toggleIcon;
 
+            //Enabling the user to click the first name and visit that user's profile
             userHolder.firstNameTextView.setOnClickListener(v -> {
                 Log.println(Log.INFO, "user data recycler after click ", user.getEmail());
                 Intent intent = new Intent(v.getContext(), ShowOtherUserProfileActivity.class);

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.studybuddy.data.model.User;
 
@@ -201,9 +202,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    @SuppressLint("Range")
     public ArrayList<User> getUsersWithSameTopics(List<String> currentUserTopics) {
         ArrayList<User> users = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
+
+        Log.println(Log.WARN, "query to find matched buddies checking size", String.valueOf(currentUserTopics.size()));
 
         if (currentUserTopics == null || currentUserTopics.isEmpty()) {
             // No topics provided, return an empty list
@@ -219,6 +223,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
 
+        Log.println(Log.WARN, "query to find matched buddies", queryBuilder.toString());
+
         // Prepare query arguments
         String[] args = new String[currentUserTopics.size()];
         for (int i = 0; i < currentUserTopics.size(); i++) {
@@ -231,6 +237,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             if (cursor != null && cursor.moveToFirst()) {
                 do {
+
+                    Log.println(Log.WARN, "query to find matched buddies", cursor.getString(cursor.getColumnIndex(COL_2)));
                     // Extract user data from the cursor
                     @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COL_2));
                     @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(COL_3));
