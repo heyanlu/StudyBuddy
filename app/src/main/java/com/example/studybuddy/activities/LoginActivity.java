@@ -108,7 +108,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (!isSetUp) {
                     intent = new Intent(LoginActivity.this, UserProfileActivity.class);
                 } else {
-                    intent = new Intent(LoginActivity.this, MatchUserActivity.class);
+//                    intent = new Intent(LoginActivity.this, MatchUserActivity.class);
+                    intent = new Intent(LoginActivity.this, MainActivity.class);
                 }
                 startActivity(intent);
                 finish();
@@ -128,9 +129,12 @@ public class LoginActivity extends AppCompatActivity {
         boolean isSetUp = dbHelper.isSetUp(email);
         Intent intent;
         if (!isSetUp) {
-            intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+//            intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+            intent = new Intent(LoginActivity.this, MainActivity.class);
+
         } else {
-            intent = new Intent(LoginActivity.this, MatchUserActivity.class);
+//            intent = new Intent(LoginActivity.this, MatchUserActivity.class);
+            intent = new Intent(LoginActivity.this, MainActivity.class);
         }
         startActivity(intent);
     }

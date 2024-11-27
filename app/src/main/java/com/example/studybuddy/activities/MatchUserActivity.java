@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,28 +70,28 @@ public class MatchUserActivity extends AppCompatActivity {
 
         SectionedUserAdapter adapter = new SectionedUserAdapter(sectionedData);
         recyclerView.setAdapter(adapter);
-
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-
-        bottomNav.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.nav_matched_buddies) {
-                    return true;
-                } else if (item.getItemId() == R.id.nav_likes) {
-                    openLikesPage();
-                    return true;
-                } else if (item.getItemId() == R.id.nav_genai) {
-                    openGenAIPage();
-                    return true;
-                } else if (item.getItemId() == R.id.nav_account) {
-                    openAccountPage();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
+//
+//        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+//
+//        bottomNav.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                if (item.getItemId() == R.id.nav_matched_buddies) {
+//                    return true;
+//                } else if (item.getItemId() == R.id.nav_likes) {
+//                    openLikesPage();
+//                    return true;
+//                } else if (item.getItemId() == R.id.nav_genai) {
+//                    openGenAIPage();
+//                    return true;
+//                } else if (item.getItemId() == R.id.nav_account) {
+//                    openAccountPage();
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
     private void openLikesPage() {
