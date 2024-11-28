@@ -56,6 +56,9 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
         }
         Log.d("SectionedUserAdapter", "Display List: " + displayList.toString());
+        for (int i = 0; i < displayList.size(); i++) {
+            Log.d("SectionedUserAdapter", "displayList[" + i + "] = " + displayList.get(i));
+        }
     }
 
     public void updateData(Map<String, List<User>> newSectionedData) {
@@ -66,22 +69,31 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
+        Log.d("SectionedUserAdapter", "Item count: " + displayList.size());
         return displayList.size();
+//        return sectionedData.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         if (displayList.get(position) instanceof String) {
+            Log.d("SectionedUserAdapter", "View type for position " + position + ": HEADER");
+
             return VIEW_TYPE_HEADER;
         } else {
+            Log.d("SectionedUserAdapter", "View type for position " + position + ": USER");
+
             return VIEW_TYPE_USER;
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Log.d("SectionedUserAdapter", "onBindViewHolder called for position: " + position);
         if (getItemViewType(position) == VIEW_TYPE_HEADER) {
             String sectionTitle = (String) displayList.get(position);
+            Log.d("SectionedUserAdapter", "Binding header: " + sectionTitle);
+
             HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
             headerHolder.sectionTitle.setText(sectionTitle);
 
@@ -111,8 +123,10 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
                 buildDisplayList();
                 notifyDataSetChanged();
             });
-        } else {
+        } else if (getItemViewType(position) == VIEW_TYPE_USER){
             User user = (User) displayList.get(position);
+            Log.d("SectionedUserAdapter", "Binding user: " + user);
+
             Log.println(Log.WARN, "user data recycler", user.getEmail());
             UserViewHolder userHolder = (UserViewHolder) holder;
             userHolder.firstNameTextView.setText(user.getFirstName()+" "+user.getLastName());
@@ -182,7 +196,9 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
             return new HeaderViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_user_user_adaptor, parent, false);
+//                    .inflate(R.layout.item_user_user_adaptor, parent, false);
+                    .inflate(R.layout.item_user, parent, false);
+
             return new UserViewHolder(view);
         }
     }

@@ -70,39 +70,5 @@ public class MatchUserActivity extends AppCompatActivity {
 
         SectionedUserAdapter adapter = new SectionedUserAdapter(sectionedData);
         recyclerView.setAdapter(adapter);
-//
-//        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-//
-//        bottomNav.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                if (item.getItemId() == R.id.nav_matched_buddies) {
-//                    return true;
-//                } else if (item.getItemId() == R.id.nav_likes) {
-//                    openLikesPage();
-//                    return true;
-//                } else if (item.getItemId() == R.id.nav_genai) {
-//                    openGenAIPage();
-//                    return true;
-//                } else if (item.getItemId() == R.id.nav_account) {
-//                    openAccountPage();
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
     }
-
-//    private void openLikesPage() {
-//        startActivity(new Intent(MatchUserActivity.this, LikesActivity.class));
-//    }
-//
-//    private void openGenAIPage() {
-//        startActivity(new Intent(MatchUserActivity.this, GenAIActivity.class));
-//    }
-//
-//    private void openAccountPage() {
-//        startActivity(new Intent(MatchUserActivity.this, ShowOtherUserProfileActivity.class));
-//    }
 }

@@ -1,6 +1,7 @@
 package com.example.studybuddy.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.studybuddy.data.database.DatabaseHelper;
 import com.example.studybuddy.data.model.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +50,14 @@ public class MatchUserFragment extends Fragment {
 
         ArrayList<User> users = dbHelper.getUsersWithSameTopics(currentUserTopics);
 
+        if (users == null || users.isEmpty()) {
+            Log.e("MatchUserFragment", "No users returned by getUsersWithSameTopics.");
+        } else {
+            Log.d("MatchUserFragment", "Users retrieved: " + users.size());
+        }
+
+
+
         Map<String, List<User>> sectionedData = new HashMap<>();
         for (String topic : currentUserTopics) {
             List<User> filteredUsers = new ArrayList<>();
@@ -61,6 +71,11 @@ public class MatchUserFragment extends Fragment {
             }
         }
         SectionedUserAdapter adapter = new SectionedUserAdapter(sectionedData);
+
+        Log.d("MatchUserFragment", "Sectioned data size: " + sectionedData.size());
+
+
+
         recyclerView.setAdapter(adapter);
         return view;
     }
