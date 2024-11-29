@@ -19,8 +19,8 @@
         android:layout_marginEnd="0dp">
 
         <LinearLayout
-            android:layout_width="356dp"
-            android:layout_height="56dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:gravity="bottom"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:text="2/4"
+                android:text="@string/progress_2"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -122,7 +122,7 @@
                 android:id="@+id/checkComputerScience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Computer Science"
+                android:text="@string/cs"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -130,7 +130,7 @@
                 android:id="@+id/checkBiology"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Biology"
+                android:text="@string/bio"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -138,7 +138,7 @@
                 android:id="@+id/checkChemistry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chemistry"
+                android:text="@string/chem"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -146,7 +146,7 @@
                 android:id="@+id/checkMathematics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mathematics"
+                android:text="@string/maths"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -154,7 +154,7 @@
                 android:id="@+id/checkEngineering"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Engineering"
+                android:text="@string/engineering"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -162,7 +162,7 @@
                 android:id="@+id/checkPhysics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Physics"
+                android:text="@string/phy"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -170,7 +170,7 @@
                 android:id="@+id/checkEnglish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="English"
+                android:text="@string/eng"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -178,7 +178,7 @@
                 android:id="@+id/checkHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="History"
+                android:text="@string/history"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -186,7 +186,7 @@
                 android:id="@+id/checkPhilosophy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Philosophy"
+                android:text="@string/philosophy"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -194,7 +194,7 @@
                 android:id="@+id/checkFrench"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="French"
+                android:text="@string/french"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -206,7 +206,7 @@
         android:id="@+id/buttonNext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continue"
+        android:text="@string/button_save_preferences"
         android:textColor="#FFFFFF"
         android:backgroundTint="@color/primaryColor"
         android:layout_alignParentBottom="true" />
