@@ -1,8 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/account_bg"
+        android:scaleType="centerCrop"
+        android:alpha="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Toolbar with Pencil Icon -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/accountToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:title="Account Information"
+        app:titleTextColor="@android:color/white"
+        tools:ignore="MissingConstraints">
+
+        <ImageButton
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edit"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Edit Account"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            app:tint="@android:color/white" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Account Information Fields -->
+    <EditText
+        android:id="@+id/editTextFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:enabled="false"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/accountToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:enabled="false"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/editTextFirstName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:enabled="false"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/editTextLastName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:enabled="false"
+        android:textColor="@android:color/black"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gender"
+        android:enabled="false"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/editTextAge"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextOccupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Occupation"
+        android:enabled="false"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/editTextGender"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
 
     <!-- Logout Button -->
     <Button
@@ -10,9 +113,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:layout_marginTop="200dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextOccupation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

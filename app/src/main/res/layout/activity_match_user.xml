@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background11"
-    >
+    android:background="@drawable/account_bg">
 
-    <!-- Toolbar with enhanced style -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="?android:attr/actionBarWidgetTheme"
-        android:elevation="4dp">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search Users"
-            android:elevation="2dp" />
-    </androidx.appcompat.widget.Toolbar>
-
-    <!-- Title Text with modern styling -->
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
@@ -40,12 +19,12 @@
         android:shadowDy="2"
         android:shadowRadius="4"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        android:alpha="0.5" />
 
-
-    <!-- RecyclerView with better padding, rounded item style, and background -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersRecyclerView"
         android:layout_width="0dp"
@@ -57,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@id/titleTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        android:alpha="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
