@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-        //Button buttonSignup = findViewById(R.id.signUpLink);
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("userEmail", null);
@@ -67,12 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-//        if (userEmail != null) {
-//            navigateToNextActivity(userEmail);
-//            finish();
-//        }
 
-        // Testing
         if (userEmail != null) {
             Log.d("LoginActivity", "User is logged in with email: " + userEmail);
             navigateToNextActivity(userEmail);
@@ -97,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                 editor.apply();
 
 
-                //store userID and pass it to ShowUserProfile for connecting purpose
                 String userID = dbHelper.getUserIDByEmail(email);
                 editor.putString("userID", userID);
                 editor.apply();
@@ -119,19 +112,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        buttonSignup.setOnClickListener(view -> {
-//            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-//            startActivity(intent);
-//            finish();
-//        });
     }
 
     private void navigateToNextActivity(String email) {
         boolean isSetUp = dbHelper.isSetUp(email);
         Intent intent;
         if (!isSetUp) {
-//            intent = new Intent(LoginActivity.this, UserProfileActivity.class);
-            intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+//            intent = new Intent(LoginActivity.this, MainActivity.class);
 
         } else {
 //            intent = new Intent(LoginActivity.this, MatchUserActivity.class);

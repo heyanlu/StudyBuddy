@@ -1,15 +1,11 @@
 package com.example.studybuddy.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +13,6 @@ import com.example.studybuddy.R;
 import com.example.studybuddy.adapter.SectionedUserAdapter;
 import com.example.studybuddy.data.database.DatabaseHelper;
 import com.example.studybuddy.data.model.User;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +21,7 @@ import java.util.Map;
 
 public class MatchUserActivity extends AppCompatActivity {
 
-    // TODO: add function to search
+    private DatabaseHelper dbHelper;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -34,28 +29,58 @@ public class MatchUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_user);
 
-
         RecyclerView recyclerView = findViewById(R.id.usersRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("userEmail", null);
 
-        List<String> currentUserTopics = new ArrayList<>();
-        currentUserTopics.add("Computer Science");
-        currentUserTopics.add("Mathematics");
-        currentUserTopics.add("Physics");
-        currentUserTopics.add("English");
-        currentUserTopics.add("French");
-        currentUserTopics.add("Engineering");
-        currentUserTopics.add("History");
-        currentUserTopics.add("Philosophy");
-        currentUserTopics.add("Psychology");
-        currentUserTopics.add("Music");
-        currentUserTopics.add("Art");
+        Log.d("MatchUserActivity", "User email from SharedPreferences: " + userEmail);
 
-        ArrayList<User> users = dbHelper.getUsersWithSameTopics(currentUserTopics);
 
+        dbHelper = new DatabaseHelper(this);
+
+        User currentUser = dbHelper.getUserInfoByEmail(userEmail);
+
+        if (currentUser != null) {
+            Log.d("MatchUserActivity", "Current user fetched: " + currentUser.getEmail());
+            Log.d("MatchUserActivity", "Topics interested: " + currentUser.getTopicInterested());
+        } else {
+            Log.d("MatchUserActivity", "No user found with email: " + userEmail);
+        }
+
+        if (currentUser == null) {
+            return;
+        }
+
+
+        List<String> currentUserTopics = currentUser.getTopicInterested();
+        if (currentUserTopics.isEmpty()) {
+            return;
+        }
+
+
+        ArrayList<User> users = getUsersWithMatchingTopics(currentUserTopics);
+
+        Map<String, List<User>> sectionedData = organizeUsersByTopic(currentUserTopics, users);
+
+        SectionedUserAdapter adapter = new SectionedUserAdapter(sectionedData);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private ArrayList<User> getUsersWithMatchingTopics(List<String> currentUserTopics) {
+        if (currentUserTopics == null || currentUserTopics.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return dbHelper.getUsersWithSameTopics(currentUserTopics);
+    }
+
+    private Map<String, List<User>> organizeUsersByTopic(List<String> currentUserTopics, ArrayList<User> users) {
         Map<String, List<User>> sectionedData = new HashMap<>();
+        if (users == null || users.isEmpty()) {
+            return sectionedData;
+        }
+
         for (String topic : currentUserTopics) {
             List<User> filteredUsers = new ArrayList<>();
             for (User user : users) {
@@ -67,8 +92,6 @@ public class MatchUserActivity extends AppCompatActivity {
                 sectionedData.put(topic, filteredUsers);
             }
         }
-
-        SectionedUserAdapter adapter = new SectionedUserAdapter(sectionedData);
-        recyclerView.setAdapter(adapter);
+        return sectionedData;
     }
 }

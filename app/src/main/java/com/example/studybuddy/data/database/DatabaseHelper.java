@@ -237,7 +237,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.println(Log.WARN, "query to find matched buddies checking size", String.valueOf(currentUserTopics.size()));
 
         if (currentUserTopics == null || currentUserTopics.isEmpty()) {
-            // No topics provided, return an empty list
             return users;
         }
 
