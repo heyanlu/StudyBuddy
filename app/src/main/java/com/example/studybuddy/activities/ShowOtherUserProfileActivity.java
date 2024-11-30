@@ -3,6 +3,7 @@ package com.example.studybuddy.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studybuddy.R;
+import com.example.studybuddy.adapter.InterestsAdapter;
 import com.example.studybuddy.data.database.ConnectionsDB;
 import com.example.studybuddy.data.database.DatabaseHelper;
 import com.example.studybuddy.data.model.User;
@@ -40,6 +44,13 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
+
         Button connectBtn = findViewById(R.id.connect);
         connectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,8 +66,15 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         user = db.getUserInfoByEmail(intent.getStringExtra("email"));
         userName.setText(user.getFirstName() +" "+user.getLastName());
 
+        RecyclerView recyclerView = findViewById(R.id.interestsRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        InterestsAdapter adapter = new InterestsAdapter(user.getTopicInterested());
+        recyclerView.setAdapter(adapter);
 
-        Log.println(Log.INFO, "email address in show user profile", otherUserEmail+" "+intent.getStringExtra("email"));
+        Log.println(Log.WARN, "user topics saved in user ", String.valueOf(user.getTopicInterested()));
+
+
+       // Log.println(Log.INFO, "email address in show user profile", otherUserEmail+" "+intent.getStringExtra("email"));
     }
 
 

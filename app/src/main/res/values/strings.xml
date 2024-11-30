@@ -64,6 +64,9 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
 
+    <!--User Profile -->
+    <string name="user_interests">My Interests:</string>
+
 
 
 </resources>

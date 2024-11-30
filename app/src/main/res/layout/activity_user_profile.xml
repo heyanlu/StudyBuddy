@@ -142,6 +142,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editFirstName" />
 
+
+                <!-- Gender -->
+
                 <EditText
                     android:id="@+id/editLastName"
                     android:layout_width="match_parent"
@@ -153,12 +156,9 @@
                     android:textColor="#333333"
                     app:layout_constraintBottom_toTopOf="@+id/textGender"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textLastName" />
-
-
-                <!-- Gender -->
 
                 <TextView
                     android:id="@+id/textGender"
