@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        app:title="Account Information"
+        app:title="Profile Information"
         app:titleTextColor="@android:color/white"
         tools:ignore="MissingConstraints">
 
