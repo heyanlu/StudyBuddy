@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,9 +24,11 @@ import com.example.studybuddy.data.model.User;
 public class AccountFragment extends Fragment {
 
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextAge, editTextGender, editTextOccupation;
-    private Button saveButton, logoutButton;
+    private Button logoutButton;
     private ImageButton editButton;
     private boolean isEditable = false;
+    private DatabaseHelper dbHelper;
+
 
     @Nullable
     @Override
@@ -47,14 +48,18 @@ public class AccountFragment extends Fragment {
         editButton = view.findViewById(R.id.editButton);
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-        String firstName = sharedPreferences.getString("userFirstName", "N/A");
-        String lastName = sharedPreferences.getString("userLastName", "N/A");
-        String email = sharedPreferences.getString("userEmail", "N/A");
-        int age = sharedPreferences.getInt("userAge", 0);
-        String gender = sharedPreferences.getString("userGender", "N/A");
-        String occupation = sharedPreferences.getString("userOccupation", "N/A");
+        String userEmail = sharedPreferences.getString("userEmail", null);
+        dbHelper = new DatabaseHelper(requireContext());
 
-        // Set the user information in the TextViews
+        User currentUser = dbHelper.getUserInfoByEmail(userEmail);
+
+        String firstName = currentUser.getFirstName() != null ? currentUser.getFirstName() : "N/A";
+        String lastName = currentUser.getLastName() != null ? currentUser.getLastName() : "N/A";
+        String email = currentUser.getEmail() != null ? currentUser.getEmail() : "N/A";
+        int age = currentUser.getAge() > 0 ? currentUser.getAge() : 0;
+        String gender = currentUser.getGender() != null ? currentUser.getGender() : "N/A";
+        String occupation = currentUser.getOccupation() != null ? currentUser.getOccupation() : "N/A";
+
         editTextFirstName.setText("First Name: " + firstName);
         editTextLastName.setText("Last Name: " + lastName);
         editTextEmail.setText("Email: " + email);
