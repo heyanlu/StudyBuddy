@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,6 @@ public class AccountFragment extends Fragment {
     private ImageButton editButton;
     private boolean isEditable = false;
     private DatabaseHelper dbHelper;
-
 
     @Nullable
     @Override
@@ -53,28 +53,25 @@ public class AccountFragment extends Fragment {
 
         User currentUser = dbHelper.getUserInfoByEmail(userEmail);
 
-        String firstName = currentUser.getFirstName() != null ? currentUser.getFirstName() : "N/A";
-        String lastName = currentUser.getLastName() != null ? currentUser.getLastName() : "N/A";
-        String email = currentUser.getEmail() != null ? currentUser.getEmail() : "N/A";
-        int age = currentUser.getAge() > 0 ? currentUser.getAge() : 0;
-        String gender = currentUser.getGender() != null ? currentUser.getGender() : "N/A";
-        String occupation = currentUser.getOccupation() != null ? currentUser.getOccupation() : "N/A";
-
-        editTextFirstName.setText("First Name: " + firstName);
-        editTextLastName.setText("Last Name: " + lastName);
-        editTextEmail.setText("Email: " + email);
-        editTextAge.setText("Age: " + age);
-        editTextGender.setText("Gender: " + gender);
-        editTextOccupation.setText("Occupation: " + occupation);
+        editTextFirstName.setText("First Name: " + (currentUser.getFirstName() != null ? currentUser.getFirstName() : "N/A"));
+        editTextLastName.setText("Last Name: " + (currentUser.getLastName() != null ? currentUser.getLastName() : "N/A"));
+        editTextEmail.setText("Email: " + (currentUser.getEmail() != null ? currentUser.getEmail() : "N/A"));
+        editTextAge.setText("Age: " + (currentUser.getAge() > 0 ? currentUser.getAge() : 0));
+        editTextGender.setText("Gender: " + (currentUser.getGender() != null ? currentUser.getGender() : "N/A"));
+        editTextOccupation.setText("Occupation: " + (currentUser.getOccupation() != null ? currentUser.getOccupation() : "N/A"));
 
 
-        editButton.setOnClickListener(v -> toggleEditMode(!isEditable));
+        editButton.setOnClickListener(v -> {
+            if (isEditable) {
+                saveUserData();
+            }
+            toggleEditMode(!isEditable);
+        });
 
         logoutButton.setOnClickListener(v -> logout());
 
         return view;
     }
-
 
     private void toggleEditMode(boolean enable) {
         isEditable = enable;
@@ -89,38 +86,61 @@ public class AccountFragment extends Fragment {
         editButton.setImageResource(enable ? R.drawable.save : R.drawable.edit);
     }
 
-
     private void saveUserData() {
-        String firstName = editTextFirstName.getText().toString();
-        String lastName = editTextLastName.getText().toString();
-        String email = editTextEmail.getText().toString();
-        int age;
+        Log.d("AccountFragment", "saveUserData called");
+
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("userEmail", null);
+
+        if (userEmail == null) {
+            Toast.makeText(requireContext(), "User email not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String firstName = getTextWithoutLabel(editTextFirstName, "First Name: ");
+        String lastName = getTextWithoutLabel(editTextLastName, "Last Name: ");
+        String email = getTextWithoutLabel(editTextEmail, "Email: ");
+        String gender = getTextWithoutLabel(editTextGender, "Gender: ");
+        String occupation = getTextWithoutLabel(editTextOccupation, "Occupation: ");
+
+        if (email.isEmpty()) {
+            Toast.makeText(requireContext(), "Email is required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int age = 0;
         try {
-            age = editTextAge.getText().toString().isEmpty() ? 0 : Integer.parseInt(editTextAge.getText().toString());
+            age = Integer.parseInt(getTextWithoutLabel(editTextAge, "Age: "));
         } catch (NumberFormatException e) {
             Toast.makeText(requireContext(), "Invalid age input", Toast.LENGTH_SHORT).show();
             return;
         }
-        String gender = editTextGender.getText().toString();
-        String occupation = editTextOccupation.getText().toString();
 
-        firstName = firstName.isEmpty() ? "N/A" : firstName;
-        lastName = lastName.isEmpty() ? "N/A" : lastName;
-        email = email.isEmpty() ? "N/A" : email;
-        gender = gender.isEmpty() ? "N/A" : gender;
-        occupation = occupation.isEmpty() ? "N/A" : occupation;
+        Log.d("AccountFragment", "First Name: " + firstName);
+        Log.d("AccountFragment", "Last Name: " + lastName);
 
-        DatabaseHelper dbHelper = new DatabaseHelper(requireContext());
-        boolean isUpdated = dbHelper.updateUserProfile(email, firstName, lastName, age, gender, occupation);
+        boolean isUpdated = dbHelper.updateUserProfile(userEmail, firstName, lastName, age, gender, occupation);
 
         if (isUpdated) {
-            toggleEditMode(false); // Disable edit mode after saving
-            Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(requireContext(), "Error updating profile", Toast.LENGTH_SHORT).show();
-        }
+            Toast.makeText(requireContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
 
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("userEmail", email);
+            editor.apply();
+
+        } else {
+            Toast.makeText(requireContext(), "Failed to update profile. Please try again.", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    private String getTextWithoutLabel(EditText editText, String label) {
+        String text = editText.getText().toString().trim();
+        if (text.startsWith(label)) {
+            return text.substring(label.length()).trim();
+        }
+        return text;
+    }
+
 
     private void logout() {
         Log.d("AccountFragment", "Logging out...");

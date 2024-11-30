@@ -96,6 +96,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp" />
 
+
     <EditText
         android:id="@+id/editTextOccupation"
         android:layout_width="match_parent"
