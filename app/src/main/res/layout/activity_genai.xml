@@ -5,29 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.GenAiFragment"
+    android:background="@drawable/account_bg"
+
     android:padding="16dp">
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/arrow_back"
-        android:background="?android:attr/selectableItemBackground"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="start"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_view"
-        android:layout_below="@+id/backButton"
-        android:layout_above="@+id/bottom_layout"
-        />
+        android:layout_above="@+id/bottom_layout" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/welcome_text"
         android:text="Welcome to StudyBuddy!"
+        android:textColor="@color/primaryColor"
+        android:textStyle="bold"
         android:gravity="center"
         android:layout_centerInParent="true"
         android:textSize="20dp"
@@ -61,7 +55,9 @@
             android:layout_marginStart="10dp"
             android:padding="8dp"
             android:src="@drawable/baseline_send_24"
-            android:background="?attr/selectableItemBackground" />
+            android:background="@drawable/circular_button_bg"
+            android:scaleType="centerInside"
+            android:contentDescription="" />
     </RelativeLayout>
 </RelativeLayout>
 

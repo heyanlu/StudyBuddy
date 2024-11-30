@@ -20,8 +20,10 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public class OpenAIClient {
-    private static final String API_KEY="this is a fake api key for test";
+//    private static final String API_KEY="this is a fake api key for test";
+
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
+    private static final String API_KEY = "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";
     //    public static final MediaType JSON = MediaType.get("application/json");
     OkHttpClient client;
 

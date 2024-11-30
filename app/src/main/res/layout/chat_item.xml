@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner"
-        android:backgroundTint="@color/leftChatBGColor"
+        android:backgroundTint="#a064dc"
         android:padding="8dp"
         android:layout_marginEnd="80dp">
 
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="This is left chat view"
-            android:textColor="@color/backgroundColor"
+            android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner"
-        android:backgroundTint="@color/rightChatBGColor"
+        android:backgroundTint="#f5f5f5"
         android:layout_alignParentEnd="true"
         android:padding="8dp"
         android:layout_marginStart="80dp">
@@ -36,7 +36,7 @@
             android:id="@+id/right_chat_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/backgroundColor"
+            android:textColor="#333333"
             android:textSize="18sp"
             android:text="This is right chat view"
             />
