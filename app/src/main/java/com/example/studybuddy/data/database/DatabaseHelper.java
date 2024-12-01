@@ -36,8 +36,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //version 2: add column 11 "AlreadySignUp"
     public DatabaseHelper(Context context) {
+//        super(context, DATABASE_NAME, null, 2);
         super(context, DATABASE_NAME, null, 2);
     }
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -46,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "EMAIL TEXT, PASSWORD TEXT, FIRST_NAME TEXT, LAST_NAME TEXT, AGE INTEGER," +
                 "GENDER TEXT, PREFERRED_STUDY_TIME TEXT, TOPICS_INTERESTED TEXT, " +
                 "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0, OCCUPATION TEXT)");
+
     }
 
     @Override

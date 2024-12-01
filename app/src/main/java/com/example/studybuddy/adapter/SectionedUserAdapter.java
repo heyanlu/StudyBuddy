@@ -137,13 +137,11 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             //Enabling the user to click the first name and visit that user's profile
             userHolder.firstNameTextView.setOnClickListener(v -> {
-                Log.println(Log.INFO, "user data recycler after click ", user.getEmail());
                 Intent intent = new Intent(v.getContext(), ShowOtherUserProfileActivity.class);
                 intent.putExtra("email", user.getEmail());
                 intent.putExtra("firstName", user.getFirstName());
                 intent.putExtra("lastName", user.getLastName());
                 intent.putExtra("topics", user.getTopicInterested());
-
                 v.getContext().startActivity(intent);
             });
 
