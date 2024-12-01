@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_9 = "TOPICS_INTERESTED";
     public static final String COL_10 = "STUDY_DIFFICULTY_LEVEL";
     public static final String COL_11 = "ALREADY_SIGN_UP";
-    public static final String COL_12 = "Occupation";
+    public static final String COL_12 = "OCCUPATION";
 
     //version 2: add column 11 "AlreadySignUp"
     public DatabaseHelper(Context context) {
@@ -48,7 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "EMAIL TEXT, PASSWORD TEXT, FIRST_NAME TEXT, LAST_NAME TEXT, AGE INTEGER," +
                 "GENDER TEXT, PREFERRED_STUDY_TIME TEXT, TOPICS_INTERESTED TEXT, " +
-                "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0, OCCUPATION TEXT)");
+                "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0, OCCUPATION TEXT DEFAULT \" \", " +
+                "ISPASSWORDRESETREQUIRED TEXT DEFAULT \"NO\")");
 
     }
 
@@ -61,9 +62,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        onCreate(db);
     }
 
-
-
-
     public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender, String occupation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -71,11 +69,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_5, lastName);
         contentValues.put(COL_6, age);
         contentValues.put(COL_7, gender);
-        //contentValues.put(COL_12, occupation);
+        contentValues.put(COL_12, occupation);
+
         int rowsUpdated = db.update(TABLE_NAME, contentValues, COL_2 + " = ?", new String[]{email});
         db.close();
         return rowsUpdated > 0;
     }
+
     public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender, String topics, String time, String level) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -483,6 +483,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        return user;
 //    }
 
+    @SuppressLint("Range")
     public User getUserInfoByEmail(String emailId){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM "+ TABLE_NAME +" WHERE " + COL_2 + " = ?";
@@ -501,6 +502,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
                 @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
                 //@SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
+                String occupation = cursor.isNull(cursor.getColumnIndex(COL_12)) ? "" : cursor.getString(cursor.getColumnIndex(COL_12));
                 ArrayList<String> studyTimeList = new ArrayList<>();
                 if (studyTime != null && !studyTime.isEmpty()) {
                     String[] studyTimeArray = studyTime.split(",");
@@ -516,8 +518,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         topicsList.add(topic.trim());
                     }
                 }
-                //user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty, occupation);
-                user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+                user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty, occupation);
+                //user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
             } while (cursor.moveToNext());
             cursor.close();
         }
