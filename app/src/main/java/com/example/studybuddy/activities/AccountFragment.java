@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,10 @@ import com.example.studybuddy.R;
 import com.example.studybuddy.data.database.DatabaseHelper;
 import com.example.studybuddy.data.model.User;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class AccountFragment extends Fragment {
 
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextAge, editTextGender, editTextOccupation;
@@ -29,6 +35,9 @@ public class AccountFragment extends Fragment {
     private ImageButton editButton;
     private boolean isEditable = false;
     private DatabaseHelper dbHelper;
+    StringBuilder updatedSelectedTopics = new StringBuilder();
+    String updatedDifficulty;
+    StringBuilder timePreferences = new StringBuilder();
 
     @Nullable
     @Override
@@ -47,6 +56,27 @@ public class AccountFragment extends Fragment {
         logoutButton = view.findViewById(R.id.logoutButton);
         editButton = view.findViewById(R.id.editButton);
 
+
+        //开始加入
+        CheckBox checkComputerScience = view.findViewById(R.id.checkComputerScience);
+        CheckBox checkBiology = view.findViewById(R.id.checkBiology);
+        CheckBox checkChemistry = view.findViewById(R.id.checkChemistry);
+        CheckBox checkMathematics = view.findViewById(R.id.checkMathematics);
+        CheckBox checkEngineering = view.findViewById(R.id.checkEngineering);
+        CheckBox checkPhysics = view.findViewById(R.id.checkPhysics);
+        CheckBox checkEnglish = view.findViewById(R.id.checkEnglish);
+        CheckBox checkFrench = view.findViewById(R.id.checkFrench);
+        CheckBox checkHistory = view.findViewById(R.id.checkHistory);
+        CheckBox checkPhilosophy = view.findViewById(R.id.checkPhilosophy);
+        CheckBox checkWeekdayMorning = view.findViewById(R.id.checkWeekdayMorning);
+        CheckBox checkWeekdayAfternoon = view.findViewById(R.id.checkWeekdayAfternoon);
+        CheckBox checkWeekdayEvening = view.findViewById(R.id.checkWeekdayEvening);
+        CheckBox checkWeekendMorning = view.findViewById(R.id.checkWeekendMorning);
+        CheckBox checkWeekendAfternoon = view.findViewById(R.id.checkWeekendAfternoon);
+        CheckBox checkWeekendEvening = view.findViewById(R.id.checkWeekendEvening);
+        RadioGroup radioGroupDifficulty = view.findViewById(R.id.radioGroupDifficulty);
+        //结束加入
+
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("userEmail", null);
         dbHelper = new DatabaseHelper(requireContext());
@@ -59,6 +89,101 @@ public class AccountFragment extends Fragment {
         editTextAge.setText("Age: " + (currentUser.getAge() > 0 ? currentUser.getAge() : 0));
         editTextGender.setText("Gender: " + (currentUser.getGender() != null ? currentUser.getGender() : "N/A"));
         editTextOccupation.setText("Occupation: " + (currentUser.getOccupation() != null ? currentUser.getOccupation() : "N/A"));
+
+        //开始加入
+        //Update Topic
+        checkComputerScience.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) updatedSelectedTopics.append("Computer Science ");
+            else removeTopic(updatedSelectedTopics, "Computer Science ");
+        });
+        checkBiology.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) updatedSelectedTopics.append("Biology ");
+            else removeTopic(updatedSelectedTopics, "Biology ");
+        });
+        checkChemistry.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) updatedSelectedTopics.append("Chemistry ");
+            else removeTopic(updatedSelectedTopics, "Chemistry ");
+        });
+        checkMathematics.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) updatedSelectedTopics.append("Mathematics ");
+            else removeTopic(updatedSelectedTopics,"Mathematics");
+        });
+
+        checkEngineering.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) updatedSelectedTopics.append("Engineering ");
+            else removeTopic(updatedSelectedTopics,"Engineering");
+        });
+        checkPhysics.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) updatedSelectedTopics.append("Physics ");
+            else removeTopic(updatedSelectedTopics, "Physics ");
+        });
+       checkEnglish.setOnCheckedChangeListener((buttonView, isChecked) -> {
+           if(isChecked) updatedSelectedTopics.append("English ");
+           else removeTopic(updatedSelectedTopics, "Computer Science ");
+       });
+       checkFrench.setOnCheckedChangeListener((buttonView, isChecked) -> {
+           if(isChecked) updatedSelectedTopics.append("French ");
+           else removeTopic(updatedSelectedTopics, "French ");
+       });
+       checkHistory.setOnCheckedChangeListener((buttonView, isChecked) -> {
+           if(isChecked) updatedSelectedTopics.append("History ");
+           else removeTopic(updatedSelectedTopics, "History ");
+       });
+       checkPhilosophy.setOnCheckedChangeListener((buttonView, isChecked) -> {
+           if(isChecked) updatedSelectedTopics.append("Philosophy ");
+           else removeTopic(updatedSelectedTopics, "Philosophy ");
+       });
+        if (updatedSelectedTopics.length() > 0) {
+            updatedSelectedTopics.setLength(updatedSelectedTopics.length() - 2);
+        }
+        String[] topics = updatedSelectedTopics.toString().split(" ");
+        ArrayList<String> topicList = new ArrayList<>(Arrays.asList(topics));
+        currentUser.setTopicInterested(topicList);
+        dbHelper.updateUserTopic(userEmail, updatedSelectedTopics.toString());
+
+        //Update Difficulty Level
+        radioGroupDifficulty.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton selectedRadioButton = group.findViewById(checkedId);
+            updatedDifficulty = selectedRadioButton.getText().toString();
+            currentUser.setStudyDifficultyLevel(updatedDifficulty);
+            dbHelper.updateUserStudyDifficultyLevel(userEmail, updatedSelectedTopics.toString());
+        });
+
+
+        //Update Study Time
+
+        checkWeekdayMorning.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) timePreferences.append("Weekday Morning ");
+            else removeTime(timePreferences, "Weekday Morning ");
+        });
+        checkWeekdayAfternoon.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) timePreferences.append("Weekday Afternoon ");
+            else removeTime(timePreferences, "Weekday Afternoon ");
+        });
+        checkWeekdayEvening.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) timePreferences.append("Weekday Evening ");
+            else removeTime(timePreferences, "Weekday Evening ");
+        });
+        checkWeekendMorning.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) timePreferences.append("Weekend Morning ");
+            else removeTime(timePreferences, "Weekend Morning ");
+        });
+        checkWeekendAfternoon.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) timePreferences.append("Weekend Afternoon ");
+            else removeTime(timePreferences, "Weekend Afternoon ");
+        });
+        checkWeekendEvening.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) timePreferences.append("Weekend Evening ");
+            else removeTime(timePreferences, "Weekend Evening ");
+        });
+        if (timePreferences.length() > 0) {
+            timePreferences.setLength(timePreferences.length() - 2);
+        }
+        String[] times = timePreferences.toString().split(",");
+        ArrayList<String> timeList = new ArrayList<>(Arrays.asList(times));
+        currentUser.setPreferredStudyTime(timeList);
+        dbHelper.updateUserStudyTime(userEmail, timePreferences.toString());
+        //结束加入
 
 
         editButton.setOnClickListener(v -> {
@@ -83,6 +208,7 @@ public class AccountFragment extends Fragment {
         editTextGender.setEnabled(enable);
         editTextOccupation.setEnabled(enable);
 
+
         editButton.setImageResource(enable ? R.drawable.save : R.drawable.edit);
     }
 
@@ -103,6 +229,12 @@ public class AccountFragment extends Fragment {
         String gender = getTextWithoutLabel(editTextGender, "Gender: ");
         String occupation = getTextWithoutLabel(editTextOccupation, "Occupation: ");
 
+        //开始加入
+        String topics = updatedSelectedTopics.toString();
+        String time = timePreferences.toString();
+        String level = updatedDifficulty;
+        //结束加入
+
         if (email.isEmpty()) {
             Toast.makeText(requireContext(), "Email is required", Toast.LENGTH_SHORT).show();
             return;
@@ -119,7 +251,11 @@ public class AccountFragment extends Fragment {
         Log.d("AccountFragment", "First Name: " + firstName);
         Log.d("AccountFragment", "Last Name: " + lastName);
 
-        boolean isUpdated = dbHelper.updateUserProfile(userEmail, firstName, lastName, age, gender, occupation);
+        //开始加入
+
+        //结束加入
+
+        boolean isUpdated = dbHelper.updateUserProfile(userEmail, firstName, lastName, age, gender, topics, time, level);
 
         if (isUpdated) {
             Toast.makeText(requireContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
@@ -158,4 +294,17 @@ public class AccountFragment extends Fragment {
 
         requireActivity().finish();
     }
+
+    private StringBuilder removeTopic(StringBuilder topics, String topic) {
+        int index = topics.indexOf(topic);
+        topics.delete(index, index + topic.length());
+        return topics;
+    }
+
+    private StringBuilder removeTime(StringBuilder times, String time) {
+        int index = times.indexOf(time);
+        times.delete(index, index + time.length());
+        return times;
+    }
+
 }

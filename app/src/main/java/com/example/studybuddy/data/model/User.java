@@ -89,6 +89,14 @@ public class User {
     public String getStudyDifficultyLevel() {
         return studyDifficultyLevel;
     }
+    public void setStudyDifficultyLevel(String difficulty) {
+        this.studyDifficultyLevel = difficulty;
+    }
+    public void setPreferredStudyTime(ArrayList<String> time) {
+        this.preferredStudyTime = time;
+    }
+
+
 
     public ArrayList<String> getPreferredStudyTime() {
         return preferredStudyTime;
@@ -96,6 +104,9 @@ public class User {
 
     public ArrayList<String> getTopicInterested() {
         return topicInterested;
+    }
+    public void setTopicInterested(ArrayList<String> updateTopic){
+        this.topicInterested = updateTopic;
     }
 
     public void addConnection(String email) {

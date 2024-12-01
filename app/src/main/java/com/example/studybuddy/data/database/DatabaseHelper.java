@@ -57,6 +57,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        onCreate(db);
     }
 
+
+
+
     public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender, String occupation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -65,7 +68,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_6, age);
         contentValues.put(COL_7, gender);
         //contentValues.put(COL_12, occupation);
-
+        int rowsUpdated = db.update(TABLE_NAME, contentValues, COL_2 + " = ?", new String[]{email});
+        db.close();
+        return rowsUpdated > 0;
+    }
+    public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender, String topics, String time, String level) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_4, firstName);
+        contentValues.put(COL_5, lastName);
+        contentValues.put(COL_6, age);
+        contentValues.put(COL_7, gender);
+        contentValues.put(COL_8, time);
+        contentValues.put(COL_9, topics);
+        contentValues.put(COL_10, level);
         int rowsUpdated = db.update(TABLE_NAME, contentValues, COL_2 + " = ?", new String[]{email});
         db.close();
         return rowsUpdated > 0;
