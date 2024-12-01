@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background11"
+    android:background="@drawable/account_bg_oval"
     android:orientation="vertical"
     android:padding="24dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/progress_container"
         android:layout_height="56dp">
 
         <LinearLayout
