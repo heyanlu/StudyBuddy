@@ -30,7 +30,7 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
     private String currentUserEmail;
     ConnectionsDB connectionsDB;
     DatabaseHelper db ;
-    TextView userName, emailTextView;
+    TextView userName, emailTextView, userOccupation;
     private String otherUserEmail;
     User user; //This is the user who we want to send the connection request
 
@@ -42,15 +42,7 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         userName = findViewById(R.id.userName);
         emailTextView = findViewById(R.id.email_textView);
-
-
-
-
-
-
-
-
-
+        userOccupation = findViewById(R.id.occupationText);
 
         Button connectBtn = findViewById(R.id.connect);
         connectBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,18 +59,16 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         user = db.getUserInfoByEmail(intent.getStringExtra("email"));
         userName.setText(user.getFirstName() +" "+user.getLastName());
         emailTextView.setText(user.getEmail());
+        userOccupation.setText(user.getOccupation());
+
+        //Setting the occupation
+
 
         RecyclerView recyclerView = findViewById(R.id.interestsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         InterestsAdapter adapter = new InterestsAdapter(user.getTopicInterested());
         recyclerView.setAdapter(adapter);
 
-
-
-        Log.println(Log.WARN, "user topics saved in user ", String.valueOf(user.getTopicInterested()));
-
-
-       // Log.println(Log.INFO, "email address in show user profile", otherUserEmail+" "+intent.getStringExtra("email"));
     }
 
 

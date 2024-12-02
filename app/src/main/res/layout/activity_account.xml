@@ -115,200 +115,203 @@
                 android:id="@+id/updateTopic"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:focusable="true"
                 android:text="Update Topic"
+                android:clickable="true"
+                android:padding="10dp"
                 android:textColor="@color/white"
                 android:background="?attr/colorPrimary"/>
 
             <!-- Checkboxes -->
 
-            <CheckBox
-                android:id="@+id/checkComputerScience"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cs" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkComputerScience"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/cs" />-->
 
-            <CheckBox
-                android:id="@+id/checkBiology"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/bio" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkBiology"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/bio" />-->
 
-            <CheckBox
-                android:id="@+id/checkChemistry"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/chem"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkChemistry"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/chem"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkMathematics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/maths"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkMathematics"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/maths"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkEngineering"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/engineering"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkEngineering"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/engineering"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkPhysics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/phy"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkPhysics"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/phy"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkEnglish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/eng"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkEnglish"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/eng"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkHistory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/history"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkHistory"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/history"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkPhilosophy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/philosophy"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkPhilosophy"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/philosophy"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkFrench"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/french"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkFrench"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/french"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/updateDifficulty"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Update Difficulty"
-                android:textColor="@color/white"
-                android:background="?attr/colorPrimary"/>
+<!--            <TextView-->
+<!--                android:id="@+id/updateDifficulty"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="Update Difficulty"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="?attr/colorPrimary"/>-->
 
-            <RadioGroup
-                android:id="@+id/radioGroupDifficulty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:orientation="vertical">
+<!--            <RadioGroup-->
+<!--                android:id="@+id/radioGroupDifficulty"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="30dp"-->
+<!--                android:orientation="vertical">-->
 
-                <RadioButton
-                    android:id="@+id/radioEasy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/easy"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radioEasy"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/easy"-->
+<!--                    android:textColor="#333333"-->
+<!--                    android:textSize="16sp" />-->
 
-                <RadioButton
-                    android:id="@+id/radioMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/medium"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radioMedium"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/medium"-->
+<!--                    android:textColor="#333333"-->
+<!--                    android:textSize="16sp" />-->
 
-                <RadioButton
-                    android:id="@+id/radioHard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hard"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
-            </RadioGroup>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radioHard"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/hard"-->
+<!--                    android:textColor="#333333"-->
+<!--                    android:textSize="16sp" />-->
+<!--            </RadioGroup>-->
 
-            <TextView
-                android:id="@+id/updateTime"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Update Study Time"
-                android:textColor="@color/white"
-                android:background="?attr/colorPrimary"/>
+<!--            <TextView-->
+<!--                android:id="@+id/updateTime"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="Update Study Time"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="?attr/colorPrimary"/>-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/weekdays"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/weekdays"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkWeekdayMorning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weekday_morning"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkWeekdayMorning"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/weekday_morning"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkWeekdayAfternoon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weekday_afternoon"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkWeekdayAfternoon"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/weekday_afternoon"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkWeekdayEvening"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weekday_evening"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkWeekdayEvening"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/weekday_evening"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <!-- Weekend Study Time -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/weekend"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            &lt;!&ndash; Weekend Study Time &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/weekend"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkWeekendMorning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weekend_morning"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkWeekendMorning"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/weekend_morning"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkWeekendAfternoon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weekend_afternoon"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkWeekendAfternoon"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/weekend_afternoon"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
-            <CheckBox
-                android:id="@+id/checkWeekendEvening"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/weekday_evening"
-                android:textColor="#333333"
-                android:textSize="16sp" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/checkWeekendEvening"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/weekday_evening"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textSize="16sp" />-->
 
         </LinearLayout>
     </ScrollView>

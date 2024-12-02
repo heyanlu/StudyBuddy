@@ -35,9 +35,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_12 = "OCCUPATION";
 
     //version 2: add column 11 "AlreadySignUp"
+    //version 3: add column 12 "OCCUPATION"
+    //version 4: add column 13 "IS_PASSWORD_RESET_REQUIRED"
     public DatabaseHelper(Context context) {
-//        super(context, DATABASE_NAME, null, 2);
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 4);
     }
 
 
@@ -49,13 +50,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "EMAIL TEXT, PASSWORD TEXT, FIRST_NAME TEXT, LAST_NAME TEXT, AGE INTEGER," +
                 "GENDER TEXT, PREFERRED_STUDY_TIME TEXT, TOPICS_INTERESTED TEXT, " +
                 "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0, OCCUPATION TEXT DEFAULT \" \", " +
-                "ISPASSWORDRESETREQUIRED TEXT DEFAULT \"NO\")");
+                "IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\")");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 2) {
+        if (oldVersion < 4) {
+            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\"");
+        }
+
+        if(oldVersion < 2){
             db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN ALREADY_SIGN_UP INTEGER DEFAULT 0");
         }
 //        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -426,6 +431,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    @SuppressLint("Range")
+    public String getUserTopicString(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_9 + " FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+
+        String topics = "";
+
+        if (cursor != null && cursor.moveToFirst()) {
+            @SuppressLint("Range") String topicsString = cursor.getString(cursor.getColumnIndex(COL_9));
+            topics = cursor.getString(cursor.getColumnIndex(COL_9));
+            cursor.close();
+        }
+        db.close();
+
+        return topics;
+
+    }
+
 
     //Get User ID (for sending connect request）
     @SuppressLint("Range")
@@ -503,6 +527,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String difficulty = cursor.getString(cursor.getColumnIndex(COL_10));
                 //@SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
                 String occupation = cursor.isNull(cursor.getColumnIndex(COL_12)) ? "" : cursor.getString(cursor.getColumnIndex(COL_12));
+                Log.println(Log.WARN, "print occupation info", occupation);
                 ArrayList<String> studyTimeList = new ArrayList<>();
                 if (studyTime != null && !studyTime.isEmpty()) {
                     String[] studyTimeArray = studyTime.split(",");

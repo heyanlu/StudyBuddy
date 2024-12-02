@@ -309,7 +309,7 @@
                 android:id="@+id/checkWeekendEvening"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/weekday_evening"
+                android:text="@string/weekend_evening"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 

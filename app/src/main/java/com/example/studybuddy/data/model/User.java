@@ -22,7 +22,6 @@ public class User {
     private List<String> connections;
 
 
-
     public User(String email, String password, String firstName, String lastName, int age,
                 String gender, ArrayList<String> preferredStudyTime, ArrayList<String> topicInterested,
                 String studyDifficultyLevel) {
@@ -37,6 +36,7 @@ public class User {
         this.studyDifficultyLevel = studyDifficultyLevel;
         this.connections = new ArrayList<>();
     }
+
     public User(String email, String password, String firstName, String lastName, int age,
                 String gender, ArrayList<String> preferredStudyTime, ArrayList<String> topicInterested,
                 String studyDifficultyLevel, String occupation) {
@@ -89,13 +89,14 @@ public class User {
     public String getStudyDifficultyLevel() {
         return studyDifficultyLevel;
     }
+
     public void setStudyDifficultyLevel(String difficulty) {
         this.studyDifficultyLevel = difficulty;
     }
+
     public void setPreferredStudyTime(ArrayList<String> time) {
         this.preferredStudyTime = time;
     }
-
 
 
     public ArrayList<String> getPreferredStudyTime() {
@@ -105,7 +106,8 @@ public class User {
     public ArrayList<String> getTopicInterested() {
         return topicInterested;
     }
-    public void setTopicInterested(ArrayList<String> updateTopic){
+
+    public void setTopicInterested(ArrayList<String> updateTopic) {
         this.topicInterested = updateTopic;
     }
 
@@ -115,15 +117,15 @@ public class User {
         }
     }
 
-    public void setOccupation(String occupation){
+    public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
 
-    public String getOccupation(){
+    public String getOccupation() {
         return this.occupation;
     }
 
-    public String getUserID(){
+    public String getUserID() {
         return this.userID;
     }
 
