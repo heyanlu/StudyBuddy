@@ -27,8 +27,7 @@ import com.example.studybuddy.data.model.User;
 import java.util.ArrayList;
 
 public class ShowOtherUserProfileActivity extends AppCompatActivity {
-    //Notes for Aarzoo:
-    //currentUserEmail should be retrieved from MatchUserActivity
+
     private String currentUserEmail;
     ConnectionsDB connectionsDB;
     DatabaseHelper db ;

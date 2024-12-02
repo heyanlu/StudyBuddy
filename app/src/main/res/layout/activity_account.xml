@@ -27,16 +27,6 @@
         app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/editButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/edit"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Edit Account"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="16dp"
-            app:tint="@android:color/white" />
     </androidx.appcompat.widget.Toolbar>
 
     <!-- ScrollView containing fields and checkboxes -->
@@ -55,77 +45,11 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- EditText fields -->
-            <EditText
-                android:id="@+id/editTextFirstName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="First Name"
-                android:enabled="false"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp" />
-
-            <EditText
-                android:id="@+id/editTextLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:enabled="false"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp" />
-
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:enabled="false"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp" />
-
-            <EditText
-                android:id="@+id/editTextAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Age"
-                android:enabled="false"
-                android:textColor="@android:color/black"
-                android:inputType="number"
-                android:layout_marginBottom="16dp" />
-
-            <EditText
-                android:id="@+id/editTextGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Gender"
-                android:enabled="false"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp" />
-
-            <EditText
-                android:id="@+id/editTextOccupation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Occupation"
-                android:enabled="false"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp" />
-
-<!--            <TextView-->
-<!--                android:id="@+id/updateTopic"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:focusable="true"-->
-<!--                android:text="Update Topic"-->
-<!--                android:clickable="true"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:background="?attr/colorPrimary"/>-->
-
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_marginTop="20dp"
                 android:elevation="4dp"
                 app:cardBackgroundColor="@android:color/transparent">
 
@@ -150,7 +74,7 @@
                             android:textStyle="bold" />
 
                         <ImageButton
-                            android:id="@+id/imageButton"
+                            android:id="@+id/editPersonalInfo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@android:color/transparent"

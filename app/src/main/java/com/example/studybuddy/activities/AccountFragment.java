@@ -27,7 +27,7 @@ public class AccountFragment extends Fragment {
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextAge, editTextGender, editTextOccupation;
     private TextView editTopic, myTopics, myTime, myDifficultyLevel, myFirstName, myLastName, myAge, myGender, myOccupation, myEmail;
     private Button logoutButton;
-    private ImageButton editButton;
+    private ImageButton editButton, editPersonalInfo;
     private boolean isEditable = false;
     private DatabaseHelper dbHelper;
     StringBuilder updatedSelectedTopics = new StringBuilder();
@@ -43,15 +43,15 @@ public class AccountFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_account, container, false);
 
-        editTextFirstName = view.findViewById(R.id.editTextFirstName);
-        editTextLastName = view.findViewById(R.id.editTextLastName);
-        editTextEmail = view.findViewById(R.id.editTextEmail);
-        editTextAge = view.findViewById(R.id.editTextAge);
-        editTextGender = view.findViewById(R.id.editTextGender);
-        editTextOccupation = view.findViewById(R.id.editTextOccupation);
+       // editTextFirstName = view.findViewById(R.id.editTextFirstName);
+       // editTextLastName = view.findViewById(R.id.editTextLastName);
+      //  editTextEmail = view.findViewById(R.id.editTextEmail);
+        //editTextAge = view.findViewById(R.id.editTextAge);
+        //editTextGender = view.findViewById(R.id.editTextGender);
+       // editTextOccupation = view.findViewById(R.id.editTextOccupation);
 
         logoutButton = view.findViewById(R.id.logoutButton);
-        editButton = view.findViewById(R.id.editButton);
+        //editButton = view.findViewById(R.id.editButton);
 
         myTopics = view.findViewById(R.id.my_topics);
         myTime = view.findViewById(R.id.my_time);
@@ -64,6 +64,7 @@ public class AccountFragment extends Fragment {
         myEmail = view.findViewById(R.id.my_email);
 
         editMyTopics = view.findViewById(R.id.editTopicPreference);
+        editPersonalInfo = view.findViewById(R.id.editPersonalInfo);
 
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
@@ -80,6 +81,17 @@ public class AccountFragment extends Fragment {
             startActivity(intent);
         });
 
+        editPersonalInfo.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), EditPersonalInformation.class);
+            intent.putExtra("userEmail", userEmail);
+            intent.putExtra("userFirstName", currentUser.getFirstName());
+            intent.putExtra("userLastName", currentUser.getLastName());
+            intent.putExtra("userAge", String.valueOf(currentUser.getAge()));
+            intent.putExtra("userOccupation", String.valueOf(currentUser.getOccupation()));
+            intent.putExtra("userGender", currentUser.getGender());
+            startActivity(intent);
+        });
+
         myTopics.setText(dbHelper.getUserTopicString(userEmail));
         myTime.setText(currentUser.getFormattedStudyTime());
         myDifficultyLevel.setText(currentUser.getStudyDifficultyLevel());
@@ -88,14 +100,15 @@ public class AccountFragment extends Fragment {
         myGender.setText("Gender: " + currentUser.getGender());
         myFirstName.setText("First Name: "+currentUser.getFirstName());
         myLastName.setText("Last Name: "+ currentUser.getLastName());
+        myOccupation.setText("Occupation: "+currentUser.getOccupation());
 
 
-        editTextFirstName.setText("First Name: " + (currentUser.getFirstName() != null ? currentUser.getFirstName() : "N/A"));
-        editTextLastName.setText("Last Name: " + (currentUser.getLastName() != null ? currentUser.getLastName() : "N/A"));
-        editTextEmail.setText("Email: " + (currentUser.getEmail() != null ? currentUser.getEmail() : "N/A"));
-        editTextAge.setText("Age: " + (currentUser.getAge() > 0 ? currentUser.getAge() : 0));
-        editTextGender.setText("Gender: " + (currentUser.getGender() != null ? currentUser.getGender() : "N/A"));
-        editTextOccupation.setText("Occupation: " + (currentUser.getOccupation() != null ? currentUser.getOccupation() : "N/A"));
+//        editTextFirstName.setText("First Name: " + (currentUser.getFirstName() != null ? currentUser.getFirstName() : "N/A"));
+//        editTextLastName.setText("Last Name: " + (currentUser.getLastName() != null ? currentUser.getLastName() : "N/A"));
+//        editTextEmail.setText("Email: " + (currentUser.getEmail() != null ? currentUser.getEmail() : "N/A"));
+//        editTextAge.setText("Age: " + (currentUser.getAge() > 0 ? currentUser.getAge() : 0));
+//        editTextGender.setText("Gender: " + (currentUser.getGender() != null ? currentUser.getGender() : "N/A"));
+//        editTextOccupation.setText("Occupation: " + (currentUser.getOccupation() != null ? currentUser.getOccupation() : "N/A"));
 
         //开始加入
         //Update Topic
@@ -193,12 +206,12 @@ public class AccountFragment extends Fragment {
         //结束加入
 
 
-        editButton.setOnClickListener(v -> {
-            if (isEditable) {
-                saveUserData();
-            }
-            toggleEditMode(!isEditable);
-        });
+//        editButton.setOnClickListener(v -> {
+//            if (isEditable) {
+//                saveUserData();
+//            }
+//            toggleEditMode(!isEditable);
+//        });
 
         logoutButton.setOnClickListener(v -> logout());
 

@@ -42,8 +42,11 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:background="@drawable/border6"
                     android:src="@drawable/baseline_keyboard_backspace_24"
-                    app:tint="@color/white" />
+                    app:tint="@color/primaryColor" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
