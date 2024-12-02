@@ -25,7 +25,7 @@ import com.example.studybuddy.data.model.User;
 public class AccountFragment extends Fragment {
 
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextAge, editTextGender, editTextOccupation;
-    private TextView editTopic;
+    private TextView editTopic, myTopics, myTime, myDifficultyLevel, myFirstName, myLastName, myAge, myGender, myOccupation, myEmail;
     private Button logoutButton;
     private ImageButton editButton;
     private boolean isEditable = false;
@@ -33,6 +33,7 @@ public class AccountFragment extends Fragment {
     StringBuilder updatedSelectedTopics = new StringBuilder();
     String updatedDifficulty;
     StringBuilder timePreferences = new StringBuilder();
+    ImageButton editMyTopics;
 
     @Nullable
     @Override
@@ -52,30 +53,18 @@ public class AccountFragment extends Fragment {
         logoutButton = view.findViewById(R.id.logoutButton);
         editButton = view.findViewById(R.id.editButton);
 
-        editTopic = view.findViewById(R.id.updateTopic);
+        myTopics = view.findViewById(R.id.my_topics);
+        myTime = view.findViewById(R.id.my_time);
+        myDifficultyLevel = view.findViewById(R.id.my_difficulty_level);
+        myFirstName = view.findViewById(R.id.first_name);
+        myLastName = view.findViewById(R.id.last_name);
+        myAge = view.findViewById(R.id.my_age);
+        myOccupation = view.findViewById(R.id.my_occupation);
+        myGender = view.findViewById(R.id.my_gender);
+        myEmail = view.findViewById(R.id.my_email);
 
+        editMyTopics = view.findViewById(R.id.editTopicPreference);
 
-
-
-        //开始加入
-//        CheckBox checkComputerScience = view.findViewById(R.id.checkComputerScience);
-//        CheckBox checkBiology = view.findViewById(R.id.checkBiology);
-//        CheckBox checkChemistry = view.findViewById(R.id.checkChemistry);
-//        CheckBox checkMathematics = view.findViewById(R.id.checkMathematics);
-//        CheckBox checkEngineering = view.findViewById(R.id.checkEngineering);
-//        CheckBox checkPhysics = view.findViewById(R.id.checkPhysics);
-//        CheckBox checkEnglish = view.findViewById(R.id.checkEnglish);
-//        CheckBox checkFrench = view.findViewById(R.id.checkFrench);
-//        CheckBox checkHistory = view.findViewById(R.id.checkHistory);
-//        CheckBox checkPhilosophy = view.findViewById(R.id.checkPhilosophy);
-//        CheckBox checkWeekdayMorning = view.findViewById(R.id.checkWeekdayMorning);
-//        CheckBox checkWeekdayAfternoon = view.findViewById(R.id.checkWeekdayAfternoon);
-//        CheckBox checkWeekdayEvening = view.findViewById(R.id.checkWeekdayEvening);
-//        CheckBox checkWeekendMorning = view.findViewById(R.id.checkWeekendMorning);
-//        CheckBox checkWeekendAfternoon = view.findViewById(R.id.checkWeekendAfternoon);
-//        CheckBox checkWeekendEvening = view.findViewById(R.id.checkWeekendEvening);
-//        RadioGroup radioGroupDifficulty = view.findViewById(R.id.radioGroupDifficulty);
-//        //结束加入
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("userEmail", null);
@@ -84,12 +73,22 @@ public class AccountFragment extends Fragment {
         User currentUser = dbHelper.getUserInfoByEmail(userEmail);
 
         //Calling the Edit Activity when the person clicks on the edit
-        editTopic.setOnClickListener(v -> {
+        editMyTopics.setOnClickListener(v -> {
             Intent intent = new Intent(view.getContext(), EditMyTopicPreferences.class);
             intent.putExtra("userEmail", userEmail);
             intent.putExtra("topics", currentUser.getTopicInterested());
             startActivity(intent);
         });
+
+        myTopics.setText(dbHelper.getUserTopicString(userEmail));
+        myTime.setText(currentUser.getFormattedStudyTime());
+        myDifficultyLevel.setText(currentUser.getStudyDifficultyLevel());
+        myAge.setText("Age: "+currentUser.getAge());
+        myEmail.setText("Email: "+userEmail);
+        myGender.setText("Gender: " + currentUser.getGender());
+        myFirstName.setText("First Name: "+currentUser.getFirstName());
+        myLastName.setText("Last Name: "+ currentUser.getLastName());
+
 
         editTextFirstName.setText("First Name: " + (currentUser.getFirstName() != null ? currentUser.getFirstName() : "N/A"));
         editTextLastName.setText("Last Name: " + (currentUser.getLastName() != null ? currentUser.getLastName() : "N/A"));

@@ -92,6 +92,8 @@ public class EditMyTopicPreferences extends AppCompatActivity {
             if (selectedTopics.length() > 0) {
                 Toast.makeText(this, "Topics Updated Successfully!", Toast.LENGTH_SHORT).show();
                 saveTopicToDatabase(selectedTopics.toString());
+                Intent startMain = new Intent(this, MainActivity.class);
+                startActivity(startMain);
                 finish();
 
             } else {
@@ -114,7 +116,7 @@ public class EditMyTopicPreferences extends AppCompatActivity {
         if (userEmail != null) {
             boolean isSaved = databaseHelper.updateUserTopic(userEmail, topics);
             if (isSaved) {
-                Toast.makeText(this, "Topics saved!", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "Topics saved!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Failed to save topics.", Toast.LENGTH_SHORT).show();
             }
