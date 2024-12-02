@@ -27,7 +27,7 @@ public class AccountFragment extends Fragment {
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextAge, editTextGender, editTextOccupation;
     private TextView editTopic, myTopics, myTime, myDifficultyLevel, myFirstName, myLastName, myAge, myGender, myOccupation, myEmail;
     private Button logoutButton;
-    private ImageButton editButton, editPersonalInfo;
+    private ImageButton editButton, editPersonalInfo, editTimePreference, editDifficultyPreference;
     private boolean isEditable = false;
     private DatabaseHelper dbHelper;
     StringBuilder updatedSelectedTopics = new StringBuilder();
@@ -65,6 +65,8 @@ public class AccountFragment extends Fragment {
 
         editMyTopics = view.findViewById(R.id.editTopicPreference);
         editPersonalInfo = view.findViewById(R.id.editPersonalInfo);
+        editTimePreference = view.findViewById(R.id.editTimePreference);
+        editDifficultyPreference = view.findViewById(R.id.editDifficultyPreference);
 
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
@@ -78,6 +80,19 @@ public class AccountFragment extends Fragment {
             Intent intent = new Intent(view.getContext(), EditMyTopicPreferences.class);
             intent.putExtra("userEmail", userEmail);
             intent.putExtra("topics", currentUser.getTopicInterested());
+            startActivity(intent);
+        });
+
+        editDifficultyPreference.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), EditDifficultyLevel.class);
+            intent.putExtra("userEmail", userEmail);
+            intent.putExtra("userDifficultyLevel", currentUser.getStudyDifficultyLevel());
+            startActivity(intent);
+        });
+
+        editTimePreference.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), EditPreferredTime.class);
+            intent.putExtra("userEmail", userEmail);
             startActivity(intent);
         });
 

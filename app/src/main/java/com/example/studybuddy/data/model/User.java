@@ -17,7 +17,7 @@ public class User {
     private String occupation;
     private ArrayList<String> preferredStudyTime;
     private ArrayList<String> topicInterested;
-    private String studyDifficultyLevel;
+    private String studyDifficultyLevel="";
 
     private List<String> connections;
 

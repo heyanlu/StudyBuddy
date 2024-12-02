@@ -44,9 +44,10 @@
                     android:focusable="true"
                     android:scaleType="fitXY"
                     android:layout_gravity="center"
-                    android:background="@drawable/border6"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/baseline_keyboard_backspace_24"
-                    app:tint="@color/primaryColor" />
+                    app:tint="@color/white" />
+
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
