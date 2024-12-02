@@ -22,7 +22,6 @@ public class EditDifficultyLevel extends AppCompatActivity {
 
     private RadioGroup radioGroupDifficulty;
     private Button btnSaveDifficulty;
-    private DatabaseHelper dbHelper;
     String userEmail = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class EditDifficultyLevel extends AppCompatActivity {
 
         radioGroupDifficulty = findViewById(R.id.radioGroupDifficulty);
         findViewById(R.id.buttonSaveProfile).setOnClickListener(v -> saveDifficulty());
-        dbHelper  = new DatabaseHelper(this);
 
         Intent intent = getIntent();
         userEmail = intent.getStringExtra("userEmail");
