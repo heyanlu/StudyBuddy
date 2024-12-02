@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //version 3: add column 12 "OCCUPATION"
     //version 4: add column 13 "IS_PASSWORD_RESET_REQUIRED"
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 4);
+        super(context, DATABASE_NAME, null, 5);
     }
 
 
@@ -58,6 +58,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 4) {
             db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\"");
+        }
+
+        if (oldVersion < 5) {
+            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN OCCUPATION TEXT DEFAULT \"\"");
         }
 
         if(oldVersion < 2){
