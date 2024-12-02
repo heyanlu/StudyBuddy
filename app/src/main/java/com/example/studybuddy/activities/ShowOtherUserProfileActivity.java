@@ -44,17 +44,19 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         emailTextView = findViewById(R.id.email_textView);
         userOccupation = findViewById(R.id.occupationText);
 
-        Button connectBtn = findViewById(R.id.connect);
-        connectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendConnectionRequest(currentUserEmail);
-            }
-        });
+
 
 
         Intent intent = getIntent();
         otherUserEmail = intent.getStringExtra("email");
+
+        Button connectBtn = findViewById(R.id.connect);
+        connectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendConnectionRequest(otherUserEmail);
+            } //fixed argument
+        });
 
         user = db.getUserInfoByEmail(intent.getStringExtra("email"));
         userName.setText(user.getFirstName() +" "+user.getLastName());

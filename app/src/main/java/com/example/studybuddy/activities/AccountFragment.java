@@ -259,9 +259,6 @@ public class AccountFragment extends Fragment {
         Log.d("AccountFragment", "First Name: " + firstName);
         Log.d("AccountFragment", "Last Name: " + lastName);
 
-        //开始加入
-
-        //结束加入
 
         boolean isUpdated = dbHelper.updateUserProfile(userEmail, firstName, lastName, age, gender, topics, time, level);
 

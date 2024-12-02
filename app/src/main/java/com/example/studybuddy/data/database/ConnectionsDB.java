@@ -18,6 +18,8 @@ import com.example.studybuddy.data.model.User;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ConnectionsDB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Connections.db";
@@ -80,13 +82,18 @@ public class ConnectionsDB extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_3 + " = ?";
         Cursor cursor = connectDB.rawQuery(query, new String[]{receiverEmail});
+        Set<String> senderSet = new HashSet<>();
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 @SuppressLint("Range") String connectionID = cursor.getString(cursor.getColumnIndex(COL_1));
                 @SuppressLint("Range") String senderEmail = cursor.getString(cursor.getColumnIndex(COL_2));
                 @SuppressLint("Range") String status = cursor.getString(cursor.getColumnIndex(COL_4));
                 Connections c = new Connections(connectionID, senderEmail, receiverEmail, status);
-                connections.add(c);
+
+                if(!senderEmail.equals(receiverEmail) && !senderSet.contains(senderEmail)) {
+                    connections.add(c);
+                    senderSet.add(senderEmail);
+                }
             } while (cursor.moveToNext());
             cursor.close();
         }
