@@ -26,3 +26,6 @@
 ### Database
 - **SQLite:**  
   All user data, preferences, and connections are currently managed using SQLite.
+- **SharedPreferences:**  
+  User login information is stored using SharedPreferences, ensuring that users stay logged in as long as they do not log out. This avoids repeated login prompts during app use.
+ 
