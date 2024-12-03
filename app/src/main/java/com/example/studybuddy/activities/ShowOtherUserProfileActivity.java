@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -86,6 +87,24 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         github.setText(githubLink);
         personalWeb.setText(personalLink);
 
+        linkedIn.setOnClickListener(v -> {
+            String linkedInUrl = linkedIn.getText().toString();
+        });
+
+        github.setOnClickListener(v -> {
+            String githubUrl = github.getText().toString();
+            openLink(githubUrl);
+        });
+
+        personalWeb.setOnClickListener(v -> {
+            String personalUrl = personalWeb.getText().toString();
+            openLink(personalUrl);
+        });
+
+
+
+
+
         if(linkedinLink.isEmpty() || linkedinLink.isBlank()){
             linkedIn.setVisibility(View.INVISIBLE);
             linkedInContainer.setVisibility(View.INVISIBLE);
@@ -132,6 +151,12 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    public void openLink(String link){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        startActivity(browserIntent);
+    }
+
 
 
 
