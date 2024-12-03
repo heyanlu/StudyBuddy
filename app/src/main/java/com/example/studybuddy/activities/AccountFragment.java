@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.studybuddy.EditSocialAccounts;
 import com.example.studybuddy.R;
 import com.example.studybuddy.data.database.DatabaseHelper;
 import com.example.studybuddy.data.model.User;
@@ -27,9 +28,9 @@ import com.example.studybuddy.data.model.User;
 public class AccountFragment extends Fragment {
 
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextAge, editTextGender, editTextOccupation;
-    private TextView userEmailTextView, editTopic, myTopics, myTime, myDifficultyLevel, myFirstName, myLastName, myAge, myGender, myOccupation, myEmail;
+    private TextView userEmailTextView, editTopic, myTopics, myTime, myDifficultyLevel, myFirstName, myLastName, myAge, myGender, myOccupation, myEmail, myLinkedIn, myGithub, myPersonal;
     private Button logoutButton;
-    private ImageButton editButton, editPersonalInfo, editTimePreference, editDifficultyPreference, editLoginInfo;
+    private ImageButton editButton, editPersonalInfo, editTimePreference, editDifficultyPreference, editLoginInfo, editSocial;
     private boolean isEditable = false;
     private DatabaseHelper dbHelper;
     StringBuilder updatedSelectedTopics = new StringBuilder();
@@ -69,6 +70,9 @@ public class AccountFragment extends Fragment {
         myOccupation = view.findViewById(R.id.my_occupation);
         myGender = view.findViewById(R.id.my_gender);
         myEmail = view.findViewById(R.id.my_email);
+        myLinkedIn = view.findViewById(R.id.my_linkedIn);
+        myGithub = view.findViewById(R.id.my_github);
+        myPersonal = view.findViewById(R.id.my_personal);
 
         editMyTopics = view.findViewById(R.id.editTopicPreference);
         editPersonalInfo = view.findViewById(R.id.editPersonalInfo);
@@ -76,6 +80,7 @@ public class AccountFragment extends Fragment {
         editDifficultyPreference = view.findViewById(R.id.editDifficultyPreference);
         userEmailTextView = view.findViewById(R.id.user_email);
         editLoginInfo = view.findViewById(R.id.editLoginInfo);
+        editSocial = view.findViewById(R.id.editSocial);
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("userEmail", null);
@@ -149,6 +154,15 @@ public class AccountFragment extends Fragment {
 
         });
 
+        editSocial.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), EditSocialAccounts.class);
+            intent.putExtra("userEmail", userEmail);
+            intent.putExtra("linkedIn", currentUser.getLinkedIn());
+            intent.putExtra("github", currentUser.getGithub());
+            intent.putExtra("personal", currentUser.getPersonal());
+            startActivity(intent);
+        });
+
         myTopics.setText(dbHelper.getUserTopicString(userEmail));
         myTime.setText(currentUser.getFormattedStudyTime());
         myDifficultyLevel.setText(currentUser.getStudyDifficultyLevel());
@@ -158,6 +172,9 @@ public class AccountFragment extends Fragment {
         myFirstName.setText("First Name: "+currentUser.getFirstName());
         myLastName.setText("Last Name: "+ currentUser.getLastName());
         myOccupation.setText("Occupation: "+currentUser.getOccupation());
+        myLinkedIn.setText("Linked In: "+currentUser.getLinkedIn());
+        myGithub.setText("Github: "+currentUser.getGithub());
+        myPersonal.setText("Personal: "+currentUser.getPersonal());
 
         logoutButton.setOnClickListener(v -> logout());
 
