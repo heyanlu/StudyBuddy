@@ -100,7 +100,7 @@ public class ForgotPassword extends AppCompatActivity {
 
             // Email configuration (replace with your actual email settings)
             final String username = "studybuddy1701@gmail.com";
-            final String password = "app password";
+            final String password = "ozqd elrr nboa ppgr";
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");

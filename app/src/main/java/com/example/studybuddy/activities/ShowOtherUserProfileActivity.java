@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +32,9 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
     private String currentUserEmail;
     ConnectionsDB connectionsDB;
     DatabaseHelper db ;
-    TextView userName, emailTextView, userOccupation;
+    TextView userName, emailTextView, userOccupation, linkedIn, github, personalWeb;
     private String otherUserEmail;
-    User user; //This is the user who we want to send the connection request
+    User user, userSocials; //This is the user who we want to send the connection request
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,9 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         userName = findViewById(R.id.userName);
         emailTextView = findViewById(R.id.email_textView);
         userOccupation = findViewById(R.id.occupationText);
+        linkedIn = findViewById(R.id.linkedin);
+        github = findViewById(R.id.github);
+        personalWeb = findViewById(R.id.personal);
 
 
 
@@ -60,9 +64,42 @@ public class ShowOtherUserProfileActivity extends AppCompatActivity {
         });
 
         user = db.getUserInfoByEmail(intent.getStringExtra("email"));
+        userSocials = db.getUserDetailsForMyProfilePage(intent.getStringExtra("email"));
         userName.setText(user.getFirstName() +" "+user.getLastName());
         emailTextView.setText(user.getEmail());
         userOccupation.setText(user.getOccupation());
+
+        if(userSocials.getLinkedIn().isEmpty() && userSocials.getGithub().isEmpty() && userSocials.getPersonal().isEmpty()){
+            androidx.constraintlayout.widget.ConstraintLayout layout =  findViewById(R.id.socialAccountsContainer);
+            layout.setVisibility(View.INVISIBLE);
+        }
+
+        String linkedinLink = userSocials.getLinkedIn();
+        String githubLink = userSocials.getGithub();
+        String personalLink = userSocials.getPersonal();
+
+        LinearLayout linkedInContainer = findViewById(R.id.linkedInContainer);
+        LinearLayout githubContainer = findViewById(R.id.githubContainer);
+        LinearLayout personalContainer = findViewById(R.id.personalContainer);
+
+        linkedIn.setText(linkedinLink);
+        github.setText(githubLink);
+        personalWeb.setText(personalLink);
+
+        if(linkedinLink.isEmpty() || linkedinLink.isBlank()){
+            linkedIn.setVisibility(View.INVISIBLE);
+            linkedInContainer.setVisibility(View.INVISIBLE);
+        }
+
+        if(githubLink.isEmpty() || githubLink.isBlank()){
+            github.setVisibility(View.INVISIBLE);
+            githubContainer.setVisibility(View.INVISIBLE);
+        }
+
+        if(personalLink.isEmpty() || personalLink.isBlank()){
+            personalWeb.setVisibility(View.INVISIBLE);
+            personalContainer.setVisibility(View.INVISIBLE);
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

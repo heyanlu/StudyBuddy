@@ -20,7 +20,7 @@
     <string name="login_here">Already have an account? Login here!</string>
 
     <!--User Profile Activity -->
-    <string name="text_progress_bar">1/4</string>
+    <string name="text_progress_bar">1/5</string>
     <string name="title">Tell us about yourself</string>
 
     <!--User Preferred Topic -->
@@ -28,7 +28,7 @@
 
     <!--User Preferred Study Time -->
     <string name="time_title">When do you prefer to study?</string>
-    <string name="progress_2">2/4</string>
+    <string name="progress_2">2/5</string>
     <string name="cs">Computer Science</string>
     <string name="bio">Biology</string>
     <string name="chem">Chemistry</string>
@@ -47,7 +47,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--User Preferred Time Screen -->
-    <string name="progress_3">3/4</string>
+    <string name="progress_3">3/5</string>
     <string name="weekdays">Weekdays</string>
     <string name="weekday_morning">Weekday Morning</string>
     <string name="weekday_afternoon">Weekday Afternoon</string>
@@ -58,7 +58,7 @@
     <string name="weekend_evening">Weekend Evening</string>
 
     <!--User Preferred Difficulty Level -->
-    <string name="progress_4">4/4</string>
+    <string name="progress_4">4/5</string>
     <string name="difficulty_question">What is your preferred difficulty level?</string>
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
@@ -73,6 +73,9 @@
     <string name="back_to_login">Back to Login</string>
     <string name="reset_password_email">Reset Password</string>
     <string name="email_send_confirmation">We\'ve processed your request. If the email address is linked to an account, you\'ll receive reset instructions soon.</string>
+
+    <!--Socials  -->
+    <string name="progress_5">5/5</string>
 
 
 </resources>

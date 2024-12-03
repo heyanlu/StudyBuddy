@@ -174,8 +174,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:text="@string/progress_3"
+
                 android:textColor="#333333"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -184,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:indeterminate="false"
-                android:max="4"
+                android:max="5"
                 android:progress="3"
                 android:progressDrawable="@drawable/progress_bar" />
 

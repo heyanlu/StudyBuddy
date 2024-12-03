@@ -33,12 +33,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_10 = "STUDY_DIFFICULTY_LEVEL";
     public static final String COL_11 = "ALREADY_SIGN_UP";
     public static final String COL_12 = "OCCUPATION";
+    private static final String COL_13 = "LINKED_IN_URL";
+    private static final String COL_14 = "GITHUB_URL";
+    private static final String COL_15 = "PERSONAL_WEBSITE_URL";
 
     //version 2: add column 11 "AlreadySignUp"
     //version 3: add column 12 "OCCUPATION"
     //version 4: add column 13 "IS_PASSWORD_RESET_REQUIRED"
+    //version 6 : added linked in and github link
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 5);
+        super(context, DATABASE_NAME, null, 6);
     }
 
 
@@ -50,7 +54,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "EMAIL TEXT, PASSWORD TEXT, FIRST_NAME TEXT, LAST_NAME TEXT, AGE INTEGER," +
                 "GENDER TEXT, PREFERRED_STUDY_TIME TEXT, TOPICS_INTERESTED TEXT, " +
                 "STUDY_DIFFICULTY_LEVEL TEXT, ALREADY_SIGN_UP INTEGER DEFAULT 0, OCCUPATION TEXT DEFAULT \" \", " +
-                "IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\")");
+                "IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\"," +
+                "LINKED_IN_URL TEXT DEFAULT \"\"," +
+                "GITHUB_URL TEXT DEFAULT \"\"," +
+                "PERSONAL_WEBSITE_URL TEXT DEFAULT \"\")");
 
     }
 
@@ -60,8 +67,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\"");
         }
 
-        if (oldVersion < 5) {
-            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN OCCUPATION TEXT DEFAULT \"\"");
+//        if (oldVersion < 5) {
+//            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN OCCUPATION TEXT DEFAULT \"\"");
+//        }
+
+        if(oldVersion < 6){
+            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN LINKED_IN_URL TEXT DEFAULT \"\"");
+            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN GITHUB_URL TEXT DEFAULT \"\"");
+            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN PERSONAL_WEBSITE_URL TEXT DEFAULT \"\"");
         }
 
         if(oldVersion < 2){
@@ -105,6 +118,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return password;
+    }
+
+    /**
+     * This function saves the user information in the database
+     * @param email - email of the user
+     * @param linkedIn - linked in link
+     * @param github - github link
+     * @param personal - personal website link
+     * @return - true if we are able to successfully save the data in the database else false
+     */
+    public boolean saveSocials(String email, String linkedIn, String github, String personal){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_13, linkedIn);
+        contentValues.put(COL_14, github);
+        contentValues.put(COL_15, personal);
+
+        int rowUpdate = db.update(TABLE_NAME, contentValues, COL_2 + " = ? ", new String[]{email});
+        db.close();
+        return rowUpdate > 0;
     }
 
 
@@ -530,6 +563,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userID;
     }
 
+    public User getUserDetailsForMyProfilePage(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM "+ TABLE_NAME +" WHERE " + COL_2 + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+        User user = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String emailId = cursor.getString(cursor.getColumnIndex(COL_2));
+                @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex(COL_3));
+                @SuppressLint("Range") String firstName = cursor.getString(cursor.getColumnIndex(COL_4));
+                @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COL_5));
+                @SuppressLint("Range") int age = cursor.getInt(cursor.getColumnIndex(COL_6));
+                @SuppressLint("Range") String gender = cursor.getString(cursor.getColumnIndex(COL_7));
+                @SuppressLint("Range") String studyTime = cursor.getString(cursor.getColumnIndex(COL_8));
+                @SuppressLint("Range") String topics = cursor.getString(cursor.getColumnIndex(COL_9));
+                @SuppressLint("Range") String difficulty = cursor.isNull(cursor.getColumnIndex(COL_10)) ? "" : cursor.getString(cursor.getColumnIndex(COL_10));
+                @SuppressLint("Range") String occupation = cursor.isNull(cursor.getColumnIndex(COL_12)) ? "" : cursor.getString(cursor.getColumnIndex(COL_12));
+                @SuppressLint("Range") String linkedIn = cursor.isNull(cursor.getColumnIndex(COL_12)) ? "" : cursor.getString(cursor.getColumnIndex(COL_13));
+                @SuppressLint("Range") String github = cursor.isNull(cursor.getColumnIndex(COL_12)) ? "" : cursor.getString(cursor.getColumnIndex(COL_14));
+                @SuppressLint("Range") String personal = cursor.isNull(cursor.getColumnIndex(COL_12)) ? "" : cursor.getString(cursor.getColumnIndex(COL_15));
+
+                Log.println(Log.WARN, "print occupation info", occupation);
+                ArrayList<String> studyTimeList = new ArrayList<>();
+                if (studyTime != null && !studyTime.isEmpty()) {
+                    String[] studyTimeArray = studyTime.split(",");
+                    for (String time : studyTimeArray) {
+                        studyTimeList.add(time.trim());
+                    }
+                }
+
+                ArrayList<String> topicsList = new ArrayList<>();
+                if (topics != null && !topics.isEmpty()) {
+                    String[] topicsArray = topics.split(",");
+                    for (String topic : topicsArray) {
+                        topicsList.add(topic.trim());
+                    }
+                }
+                user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty, occupation, linkedIn, github, personal);
+                //user = new User(email, password, firstName, lastName, age, gender, studyTimeList, topicsList, difficulty);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return user;
+    }
+
+
+
 
     @SuppressLint("Range")
     public User getUserInfoByEmail(String emailId){
@@ -551,6 +633,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") String difficulty = cursor.isNull(cursor.getColumnIndex(COL_10)) ? "" : cursor.getString(cursor.getColumnIndex(COL_10));
                 //@SuppressLint("Range") String occupation = cursor.getString(cursor.getColumnIndex(COL_12));
                 String occupation = cursor.isNull(cursor.getColumnIndex(COL_12)) ? "" : cursor.getString(cursor.getColumnIndex(COL_12));
+
                 Log.println(Log.WARN, "print occupation info", occupation);
                 ArrayList<String> studyTimeList = new ArrayList<>();
                 if (studyTime != null && !studyTime.isEmpty()) {

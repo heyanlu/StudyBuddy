@@ -18,6 +18,10 @@ public class User {
     private ArrayList<String> preferredStudyTime;
     private ArrayList<String> topicInterested;
     private String studyDifficultyLevel="";
+    private String linkedIn="";
+    private String github="";
+    private String personal="";
+
 
     private List<String> connections;
 
@@ -51,6 +55,24 @@ public class User {
         this.topicInterested = topicInterested;
         this.studyDifficultyLevel = studyDifficultyLevel;
         this.connections = new ArrayList<>();
+    }
+
+    public User(String email, String password, String firstName, String lastName, int age,
+                String gender, ArrayList<String> preferredStudyTime, ArrayList<String> topicInterested,
+                String studyDifficultyLevel, String occupation, String linkedIn, String github, String personal ){
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.occupation = occupation;
+        this.age = age;
+        this.gender = gender;
+        this.preferredStudyTime = preferredStudyTime;
+        this.topicInterested = topicInterested;
+        this.studyDifficultyLevel = studyDifficultyLevel;
+        this.linkedIn = linkedIn;
+        this.github = github;
+        this.personal = personal;
     }
 
 
@@ -136,6 +158,18 @@ public class User {
 
     public List<String> getConnections() {
         return connections;
+    }
+
+    public String getLinkedIn(){
+        return this.linkedIn;
+    }
+
+    public String getGithub(){
+        return this.github;
+    }
+
+    public String getPersonal(){
+        return this.personal;
     }
 
 

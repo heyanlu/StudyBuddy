@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
@@ -16,63 +17,48 @@
         <!-- First Name TextView -->
         <TextView
             android:id="@+id/firstNameTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="First Name"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:layout_width="354dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
             android:drawableStart="@drawable/ic_person"
             android:drawablePadding="8dp"
-            android:clickable="true"
             android:focusable="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:text="First Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/lastNameTextView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Last Name TextView -->
-        <TextView
-            android:id="@+id/lastNameTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:drawablePadding="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toEndOf="@id/firstNameTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Time TextView -->
         <TextView
             android:id="@+id/timeTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Study Time"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:drawableStart="@drawable/ic_time"
-            android:drawablePadding="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
+            android:drawableStart="@drawable/ic_time"
+            android:drawablePadding="8dp"
+            android:text="Study Time"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleIcon" />
 
 
         <ImageView
             android:id="@+id/toggleIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/thumb_up_blank"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/thumb_up_blank"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

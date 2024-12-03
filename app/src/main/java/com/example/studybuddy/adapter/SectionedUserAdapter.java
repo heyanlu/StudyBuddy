@@ -213,13 +213,12 @@ public class SectionedUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView firstNameTextView, lastNameTextView, timeTextView;
+        TextView firstNameTextView, timeTextView;
         ImageView toggleIcon;
 
         UserViewHolder(View itemView) {
             super(itemView);
             firstNameTextView = itemView.findViewById(R.id.firstNameTextView);
-            lastNameTextView = itemView.findViewById(R.id.lastNameTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
             toggleIcon = itemView.findViewById(R.id.toggleIcon);
         }

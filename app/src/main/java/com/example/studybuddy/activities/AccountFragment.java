@@ -108,7 +108,7 @@ public class AccountFragment extends Fragment {
 
 
 
-        User currentUser = dbHelper.getUserInfoByEmail(userEmail);
+        User currentUser = dbHelper.getUserDetailsForMyProfilePage(userEmail);
 
         //Calling the Edit Activity when the person clicks on the edit
         editMyTopics.setOnClickListener(v -> {
@@ -158,117 +158,6 @@ public class AccountFragment extends Fragment {
         myFirstName.setText("First Name: "+currentUser.getFirstName());
         myLastName.setText("Last Name: "+ currentUser.getLastName());
         myOccupation.setText("Occupation: "+currentUser.getOccupation());
-
-
-//        editTextFirstName.setText("First Name: " + (currentUser.getFirstName() != null ? currentUser.getFirstName() : "N/A"));
-//        editTextLastName.setText("Last Name: " + (currentUser.getLastName() != null ? currentUser.getLastName() : "N/A"));
-//        editTextEmail.setText("Email: " + (currentUser.getEmail() != null ? currentUser.getEmail() : "N/A"));
-//        editTextAge.setText("Age: " + (currentUser.getAge() > 0 ? currentUser.getAge() : 0));
-//        editTextGender.setText("Gender: " + (currentUser.getGender() != null ? currentUser.getGender() : "N/A"));
-//        editTextOccupation.setText("Occupation: " + (currentUser.getOccupation() != null ? currentUser.getOccupation() : "N/A"));
-
-        //开始加入
-        //Update Topic
-//        checkComputerScience.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) updatedSelectedTopics.append("Computer Science ");
-//            else removeTopic(updatedSelectedTopics, "Computer Science ");
-//        });
-//        checkBiology.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) updatedSelectedTopics.append("Biology ");
-//            else removeTopic(updatedSelectedTopics, "Biology ");
-//        });
-//        checkChemistry.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) updatedSelectedTopics.append("Chemistry ");
-//            else removeTopic(updatedSelectedTopics, "Chemistry ");
-//        });
-//        checkMathematics.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) updatedSelectedTopics.append("Mathematics ");
-//            else removeTopic(updatedSelectedTopics,"Mathematics");
-//        });
-//
-//        checkEngineering.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) updatedSelectedTopics.append("Engineering ");
-//            else removeTopic(updatedSelectedTopics,"Engineering");
-//        });
-//        checkPhysics.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if(isChecked) updatedSelectedTopics.append("Physics ");
-//            else removeTopic(updatedSelectedTopics, "Physics ");
-//        });
-//       checkEnglish.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//           if(isChecked) updatedSelectedTopics.append("English ");
-//           else removeTopic(updatedSelectedTopics, "Computer Science ");
-//       });
-//       checkFrench.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//           if(isChecked) updatedSelectedTopics.append("French ");
-//           else removeTopic(updatedSelectedTopics, "French ");
-//       });
-//       checkHistory.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//           if(isChecked) updatedSelectedTopics.append("History ");
-//           else removeTopic(updatedSelectedTopics, "History ");
-//       });
-//       checkPhilosophy.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//           if(isChecked) updatedSelectedTopics.append("Philosophy ");
-//           else removeTopic(updatedSelectedTopics, "Philosophy ");
-//       });
-//        if (updatedSelectedTopics.length() > 0) {
-//            updatedSelectedTopics.setLength(updatedSelectedTopics.length() - 2);
-//        }
-//        String[] topics = updatedSelectedTopics.toString().split(" ");
-//        ArrayList<String> topicList = new ArrayList<>(Arrays.asList(topics));
-//        currentUser.setTopicInterested(topicList);
-//        dbHelper.updateUserTopic(userEmail, updatedSelectedTopics.toString());
-//
-//        //Update Difficulty Level
-//        radioGroupDifficulty.setOnCheckedChangeListener((group, checkedId) -> {
-//            RadioButton selectedRadioButton = group.findViewById(checkedId);
-//            updatedDifficulty = selectedRadioButton.getText().toString();
-//            currentUser.setStudyDifficultyLevel(updatedDifficulty);
-//            dbHelper.updateUserStudyDifficultyLevel(userEmail, updatedSelectedTopics.toString());
-//        });
-//
-//
-//        //Update Study Time
-//
-//        checkWeekdayMorning.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if(isChecked) timePreferences.append("Weekday Morning ");
-//            else removeTime(timePreferences, "Weekday Morning ");
-//        });
-//        checkWeekdayAfternoon.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if(isChecked) timePreferences.append("Weekday Afternoon ");
-//            else removeTime(timePreferences, "Weekday Afternoon ");
-//        });
-//        checkWeekdayEvening.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if(isChecked) timePreferences.append("Weekday Evening ");
-//            else removeTime(timePreferences, "Weekday Evening ");
-//        });
-//        checkWeekendMorning.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if(isChecked) timePreferences.append("Weekend Morning ");
-//            else removeTime(timePreferences, "Weekend Morning ");
-//        });
-//        checkWeekendAfternoon.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if(isChecked) timePreferences.append("Weekend Afternoon ");
-//            else removeTime(timePreferences, "Weekend Afternoon ");
-//        });
-//        checkWeekendEvening.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) timePreferences.append("Weekend Evening ");
-//            else removeTime(timePreferences, "Weekend Evening ");
-//        });
-//        if (timePreferences.length() > 0) {
-//            timePreferences.setLength(timePreferences.length() - 2);
-//        }
-//        String[] times = timePreferences.toString().split(",");
-//        ArrayList<String> timeList = new ArrayList<>(Arrays.asList(times));
-//        currentUser.setPreferredStudyTime(timeList);
-//        dbHelper.updateUserStudyTime(userEmail, timePreferences.toString());
-        //结束加入
-
-
-//        editButton.setOnClickListener(v -> {
-//            if (isEditable) {
-//                saveUserData();
-//            }
-//            toggleEditMode(!isEditable);
-//        });
 
         logoutButton.setOnClickListener(v -> logout());
 
