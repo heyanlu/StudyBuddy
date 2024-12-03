@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -25,9 +27,9 @@ import com.example.studybuddy.data.model.User;
 public class AccountFragment extends Fragment {
 
     private EditText editTextFirstName, editTextLastName, editTextEmail, editTextAge, editTextGender, editTextOccupation;
-    private TextView editTopic, myTopics, myTime, myDifficultyLevel, myFirstName, myLastName, myAge, myGender, myOccupation, myEmail;
+    private TextView userEmailTextView, editTopic, myTopics, myTime, myDifficultyLevel, myFirstName, myLastName, myAge, myGender, myOccupation, myEmail;
     private Button logoutButton;
-    private ImageButton editButton, editPersonalInfo, editTimePreference, editDifficultyPreference;
+    private ImageButton editButton, editPersonalInfo, editTimePreference, editDifficultyPreference, editLoginInfo;
     private boolean isEditable = false;
     private DatabaseHelper dbHelper;
     StringBuilder updatedSelectedTopics = new StringBuilder();
@@ -52,6 +54,11 @@ public class AccountFragment extends Fragment {
 
         logoutButton = view.findViewById(R.id.logoutButton);
         //editButton = view.findViewById(R.id.editButton);
+      // EditText passwordTextView = view.findViewById(R.id.passwordEditText);
+
+
+
+
 
         myTopics = view.findViewById(R.id.my_topics);
         myTime = view.findViewById(R.id.my_time);
@@ -67,11 +74,39 @@ public class AccountFragment extends Fragment {
         editPersonalInfo = view.findViewById(R.id.editPersonalInfo);
         editTimePreference = view.findViewById(R.id.editTimePreference);
         editDifficultyPreference = view.findViewById(R.id.editDifficultyPreference);
-
+        userEmailTextView = view.findViewById(R.id.user_email);
+        editLoginInfo = view.findViewById(R.id.editLoginInfo);
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String userEmail = sharedPreferences.getString("userEmail", null);
+
+        EditText passwordEditText = view.findViewById(R.id.passwordEditText);
+
         dbHelper = new DatabaseHelper(requireContext());
+
+        userEmailTextView.setText(userEmail);
+       // DatabaseHelper db = new DatabaseHelper(view.getContext());
+        passwordEditText.setText(dbHelper.getPassword(userEmail));
+        passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT |
+                InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+        // Add a checkbox or toggle to show/hide password
+        CheckBox showPasswordCheckBox = view.findViewById(R.id.showPasswordCheckBox);
+        showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Show password
+                passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            } else {
+                // Hide password
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT |
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            }
+            // Move cursor to the end of the text
+            passwordEditText.setSelection(passwordEditText.length());
+        });
+
+
+
 
         User currentUser = dbHelper.getUserInfoByEmail(userEmail);
 
@@ -105,6 +140,13 @@ public class AccountFragment extends Fragment {
             intent.putExtra("userOccupation", String.valueOf(currentUser.getOccupation()));
             intent.putExtra("userGender", currentUser.getGender());
             startActivity(intent);
+        });
+
+        editLoginInfo.setOnClickListener( v -> {
+            Intent intent = new Intent(view.getContext(), ResetPassword.class);
+            intent.putExtra("userEmail", userEmail);
+            startActivity(intent);
+
         });
 
         myTopics.setText(dbHelper.getUserTopicString(userEmail));

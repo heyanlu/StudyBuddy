@@ -9,7 +9,6 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +37,13 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
         editTextLoginEmail = findViewById(R.id.emailEditText);
         editTextLoginPassword = findViewById(R.id.passwordEditText);
+        forgetPasswordLink = findViewById(R.id.forgotPasswordLink);
+
+        forgetPasswordLink.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ForgotPassword.class);
+            startActivity(intent);
+            finish();
+        });
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
 

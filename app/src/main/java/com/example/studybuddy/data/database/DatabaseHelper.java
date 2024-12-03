@@ -60,9 +60,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\"");
         }
 
-        if (oldVersion < 5) {
-            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN OCCUPATION TEXT DEFAULT \"\"");
-        }
+//        if (oldVersion < 5) {
+//            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN OCCUPATION TEXT DEFAULT \"\"");
+//        }
 
         if(oldVersion < 2){
             db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN ALREADY_SIGN_UP INTEGER DEFAULT 0");
@@ -83,6 +83,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int rowsUpdated = db.update(TABLE_NAME, contentValues, COL_2 + " = ?", new String[]{email});
         db.close();
         return rowsUpdated > 0;
+    }
+
+    /**
+     * This function returns User Password
+     * @param email - email address of the user
+     * @return - password of the user
+     */
+    @SuppressLint("Range")
+    public String getPassword(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_3 + " FROM " + TABLE_NAME + " WHERE " + COL_2 + " = ?";
+        String[] args = {email};
+
+        Cursor cursor = db.rawQuery(query, args);
+        String password = "";
+
+        if(cursor != null && cursor.moveToFirst()){
+            password = cursor.isNull(cursor.getColumnIndex(COL_3)) ? "" : cursor.getString(cursor.getColumnIndex(COL_3));
+            cursor.close();
+        }
+        db.close();
+        return password;
+    }
+
+
+    /**
+     * This function is used to update user password
+     * @param email - email address of the user
+     * @param newPassword - new password set by the user
+     * @return - true if password reset is successful otherwise false
+     */
+    public boolean updatePassword(String email, String newPassword){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_3, newPassword);
+        int rowUpdate = db.update(TABLE_NAME, contentValues, COL_2 + " = ? ", new String[]{email});
+        db.close();
+        return rowUpdate > 0;
     }
 
     public boolean updateUserProfile(String email, String firstName, String lastName, int age, String gender, String topics, String time, String level) {
@@ -454,6 +492,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     *
+     * @param email - user email address
+     * @return - preferred study time of the user as a string
+     */
     @SuppressLint("Range")
     public String getUserStudyTimeString(String email){
         SQLiteDatabase db = this.getReadableDatabase();

@@ -44,5 +44,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation (libs.material) //Add for password visibility
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.sun.mail:android-mail:1.6.2")
+    implementation("com.sun.mail:android-activation:1.6.2")
 
 }
