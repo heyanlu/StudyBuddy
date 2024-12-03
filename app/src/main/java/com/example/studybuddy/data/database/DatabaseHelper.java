@@ -60,9 +60,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN IS_PASSWORD_RESET_REQUIRED TEXT DEFAULT \"no\"");
         }
 
-//        if (oldVersion < 5) {
-//            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN OCCUPATION TEXT DEFAULT \"\"");
-//        }
+        if (oldVersion < 5) {
+            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN OCCUPATION TEXT DEFAULT \"\"");
+        }
 
         if(oldVersion < 2){
             db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN ALREADY_SIGN_UP INTEGER DEFAULT 0");
